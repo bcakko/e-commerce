@@ -1,5 +1,5 @@
 const MainHeader = () => {
-  return <header>MainHeader</header>;
+  return <header>MainHeader'dan selam</header>;
 };
 
 export default MainHeader;
