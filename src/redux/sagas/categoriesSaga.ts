@@ -1,6 +1,7 @@
+import { Categories } from "./../../types/Categories.types";
 import {
-  GET_CATEGORIES_SUCCESS,
   GET_CATEGORIES_FETCH,
+  categoriesSuccessAction,
 } from "./../actions/categoriesActions";
 import { call, put, takeEvery } from "@redux-saga/core/effects";
 
@@ -10,12 +11,10 @@ function categoriesFetch() {
   );
 }
 
-function* workGetCategoriesFetch(): any {
-  const categories = yield call(categoriesFetch);
-  yield put({
-    type: GET_CATEGORIES_SUCCESS,
-    payload: { categories },
-  });
+function* workGetCategoriesFetch() {
+  const categories: Categories = yield call(categoriesFetch);
+
+  yield put(categoriesSuccessAction(categories));
 }
 
 function* categoriesSaga() {

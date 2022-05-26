@@ -1,13 +1,13 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GET_FILTERED_FETCH,
   GET_PRODUCTS_FETCH,
 } from "../redux/actions/productsActions";
+import { RootState } from "../types/RootState.types";
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state: any) => state.products.products);
+  const products = useSelector((state: RootState) => state.products.products);
   const filtered = useSelector((state: any) => state.products.filteredProducts);
 
 

@@ -1,17 +1,19 @@
 import {
   GET_PRODUCTS_SUCCESS,
-  GET_FILTERED_FETCH,
   GET_FILTERED_SUCCESS,
 } from "./../actions/productsActions";
 import { AnyAction } from "redux";
-const initialState = {
+import { ProductsState } from "../../types/Products.types";
+const initialState: ProductsState = {
   products: [],
   filteredProducts: [],
-  selectedCategory: "",
   isLoading: false,
 };
 
-const productsReducer = (state = initialState, action: AnyAction) => {
+const productsReducer = (
+  state = initialState,
+  action: AnyAction
+): ProductsState => {
   switch (action.type) {
     case GET_PRODUCTS_SUCCESS:
       return {

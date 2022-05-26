@@ -1,11 +1,11 @@
-import { AnyAction } from "redux";
 import {
+  filteredSuccessAction,
   GET_FILTERED_FETCH,
-  GET_FILTERED_SUCCESS,
   GET_PRODUCTS_FETCH,
+  productsSuccessAction,
 } from "./../actions/productsActions";
 import { call, put, takeEvery } from "@redux-saga/core/effects";
-import { GET_PRODUCTS_SUCCESS } from "../actions/productsActions";
+import { FilteredFetchAction, Products } from "../../types/Products.types";
 
 function productsFetch() {
   return fetch("https://fakestoreapi.com/products").then((response) =>
@@ -21,20 +21,17 @@ function filteredFetch(category: string) {
 
 // WORKERS
 
-function* workGetProductsFetch(): any {
-  const products = yield call(productsFetch);
-  yield put({
-    type: GET_PRODUCTS_SUCCESS,
-    payload: { products },
-  });
+function* workGetProductsFetch() {
+  const products: Products[] = yield call(productsFetch);
+  yield put(productsSuccessAction(products));
 }
 
-function* workGetFilteredFetch(action: AnyAction): any {
-  const filteredProducts = yield call(filteredFetch, action.payload.category);
-  yield put({
-    type: GET_FILTERED_SUCCESS,
-    payload: { filteredProducts },
-  });
+function* workGetFilteredFetch(action: FilteredFetchAction) {
+  const filteredProducts: Products[] = yield call(
+    filteredFetch,
+    action.payload.category
+  );
+  yield put(filteredSuccessAction(filteredProducts));
 }
 
 // SAGAS
