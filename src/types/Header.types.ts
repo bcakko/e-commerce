@@ -1,4 +1,4 @@
-import { Categories } from "./Categories.types";
+import { Products } from "./Products.types"
 
 export interface ISearchBarProps {
     mainWidth: string,
@@ -14,6 +14,15 @@ export interface IUserNavProps {
     iconColor: string
 }
 
-export interface INavBarProps {
-    ddData: Categories
+export interface IDropdownProps {
+    ddTitle: string | JSX.Element,
+    ddTitleStyle: string,
+    ddTitleHoverColor: string,
+    ddList: string[],
+    ddListStyle: string,
+    ddBackgroundColor: string
+}
+
+export interface IMiniDropDownProps {
+    ddUser?: string[]
 }

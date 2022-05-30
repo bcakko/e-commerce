@@ -10,6 +10,9 @@ function App() {
       <Header/>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/profile" element={<HomePage />} />
+        <Route path="/favourites" element={<HomePage />} />
+        <Route path="/cart" element={<HomePage />} />
       </Routes>
       <Footer/>
     </div>

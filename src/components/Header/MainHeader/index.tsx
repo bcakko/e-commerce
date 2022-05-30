@@ -6,7 +6,7 @@ const MainHeader = () => {
       <header className="w-full h-28 flex justify-center border-b border-main-color">
         <div className="sm:w-full md:flex lg:w-11/12 justify-between items-center font-sans">
           <Link to="/">
-            <div className="text-main-color font-bolds lg:text-3xl lg:flex-col md:text-3xl md:flex md:flex-col">
+            <div className=" lg:text-3xl lg:flex-col md:text-3xl md:flex md:flex-col text-main-color hover:text-side-color transition-all">
               <span>fake</span>
               <span>store</span>
             </div>
