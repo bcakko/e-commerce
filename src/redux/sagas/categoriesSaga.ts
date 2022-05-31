@@ -6,7 +6,7 @@ import {
 import { call, put, takeEvery } from "@redux-saga/core/effects";
 
 function categoriesFetch() {
-  return fetch("https://fakestoreapi.com/products").then((response) =>
+  return fetch("https://fakestoreapi.com/products/categories").then((response) =>
     response.json()
   );
 }

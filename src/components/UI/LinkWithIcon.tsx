@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-
 const LinkWithIcon = (props: {
   type: "inner" | "outer";
   path: string;
@@ -13,12 +12,10 @@ const LinkWithIcon = (props: {
       </NavLink>
     );
   }
-
   return (
     <a className={props.className} href={props.path}>
       {props.icon}
     </a>
   );
 };
-
 export default LinkWithIcon;
