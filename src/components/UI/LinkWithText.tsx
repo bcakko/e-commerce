@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-
 const LinkWithText = (props: {
   type: "inner" | "outer";
   path: string;
@@ -13,12 +12,10 @@ const LinkWithText = (props: {
       </NavLink>
     );
   }
-
   return (
     <a className={props.className} href={props.path}>
       {props.text}
     </a>
   );
 };
-
 export default LinkWithText;
