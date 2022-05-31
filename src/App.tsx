@@ -13,8 +13,9 @@ function App() {
         <Route path="/favourites" element={<HomePage />} />
         <Route path="/cart" element={<HomePage />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
+
 export default App;

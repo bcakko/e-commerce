@@ -1,5 +1,13 @@
+import ProductsHeader from "./ProductsHeader";
+import ProductsList from "./ProductsList";
+
 const Products = () => {
-  return <div>Products</div>;
+  return (
+    <div>
+      <ProductsHeader />
+      <ProductsList />
+    </div>
+  );
 };
 
 export default Products;
