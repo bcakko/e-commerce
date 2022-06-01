@@ -1,7 +1,6 @@
-import { CategoriesState } from "./Categories.types";
-import { ProductsState } from "./Products.types";
+import { CollectionState, FilterCollectionState } from "./States.types";
 
 export interface RootState {
-  products: ProductsState;
-  categories: CategoriesState;
+  collection: CollectionState;
+  filterCollection: FilterCollectionState;
 }

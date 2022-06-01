@@ -1,5 +1,3 @@
-import { Products } from "./Products.types"
-
 export interface ISearchBarProps {
     mainWidth: string,
     mainBorderColor: string,

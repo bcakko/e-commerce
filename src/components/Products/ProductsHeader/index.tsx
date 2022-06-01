@@ -6,22 +6,22 @@ import ProductsFilter from "./ProductsFilter";
 import ProductsResults from "./ProductsResults";
 
 const ProductsHeader = () => {
-  let products = useSelector((state: RootState) => state.products.products);
+  // let products = useSelector((state: RootState) => state.products.products);
 
-  const [sortedProducts, setSortedProducts] = useState(products);
+  // const [sortedProducts, setSortedProducts] = useState(products);
 
-  const onFilterChangeHandler = (filterValue: string) => {
-    if (filterValue === "default") return products;
-    if (filterValue === "ascending")
-      setSortedProducts(products.sort((e) => e.price));
-  };
+  // const onFilterChangeHandler = (filterValue: string) => {
+  //   if (filterValue === "default") return products;
+  //   if (filterValue === "ascending")
+  //     setSortedProducts(products.sort((e) => e.price));
+  // };
 
-  return (
-    <div className="flex justify-between px-5 pb-8">
-      <ProductsResults count={products.length} />
-      <ProductsFilter onFilterChange={onFilterChangeHandler} />
-    </div>
-  );
+  // return (
+  //   <div className="flex justify-between px-5 pb-8">
+  //     <ProductsResults count={products.length} />
+  //     <ProductsFilter onFilterChange={onFilterChangeHandler} />
+  //   </div>
+  // );
 };
 
 export default ProductsHeader;

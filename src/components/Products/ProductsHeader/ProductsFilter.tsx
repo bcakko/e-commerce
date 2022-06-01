@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Products } from "../../../types/Products.types";
 
 const ProductsFilter = (props: {
-  onFilterChange: (filterValue: string) => Products[] | undefined;
+  onFilterChange: (filterValue: string) => any ;
 }) => {
   const [filterValue, setFilterValue] = useState("default");
 

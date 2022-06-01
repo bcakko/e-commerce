@@ -1,9 +1,9 @@
 import { all, fork } from "redux-saga/effects";
-import categoriesSaga from "./categoriesSaga";
-import productsSaga from "./productsSaga";
+import filterCollectionSaga from "./filterCollectionSaga";
+import collectionSaga from "./collectionSaga";
 
 const sagas = function* () {
-  yield all([fork(productsSaga), fork(categoriesSaga)]);
+  yield all([fork(collectionSaga), fork(filterCollectionSaga)]);
 };
 
 export default sagas;
