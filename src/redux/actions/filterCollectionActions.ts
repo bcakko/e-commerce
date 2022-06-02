@@ -4,7 +4,7 @@ import {
 } from "../../types/Actions.types";
 
 import { Movie, Movies } from "../../types/Movies.types";
-import { People, Person } from "../../types/People.types";
+import { KnownForEntity, People, Person } from "../../types/People.types";
 import { Show, Shows } from "../../types/Shows.types";
 export const FILTER_COLLECTION_FETCH = "FILTER_COLLECTION_FETCH";
 export const FILTER_COLLECTION_SUCCESS = "FILTER_COLLECTION_SUCCESS";
@@ -23,10 +23,11 @@ export const filterCollectionFetchAction = (
 
 export interface FilterParamType {
   page: number;
-  results?: (Person | Show | Movie)[] | null;
+  results: (Movie | Show | Person)[];
   total_pages: number;
   total_results: number;
 }
+
 
 export const filterCollectionSuccessAction = (
   param: FilterParamType

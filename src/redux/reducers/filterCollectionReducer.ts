@@ -6,7 +6,12 @@ import { AnyAction } from "redux";
 import { FilterCollectionState } from "../../types/States.types";
 
 const initialState: FilterCollectionState = {
-  collection: {},
+  collection: {
+    page: 0,
+    results: [],
+    total_results: 0,
+    total_pages: 0
+  },
   isLoading: false,
 };
 

@@ -4,11 +4,11 @@ import UserNav from "./UserNav";
 const MainHeader = () => {
   return (
       <header className="w-full h-28 flex justify-center border-b border-main-color">
-        <div className="sm:w-full md:flex lg:w-11/12 justify-between items-center font-sans">
+        <div className="xs:w-full xs:flex lg:w-11/12 justify-between items-center font-sans">
           <Link to="/">
-            <div className=" lg:text-3xl lg:flex-col md:text-3xl md:flex md:flex-col text-main-color hover:text-side-color transition-all">
+            <div className="md:text-3xl md:flex md:flex-col xs:text-2xl text-main-color hover:text-side-color transition-all">
               <span>fake</span>
-              <span>store</span>
+              <span>collection</span>
             </div>
           </Link>
           <SearchBar 

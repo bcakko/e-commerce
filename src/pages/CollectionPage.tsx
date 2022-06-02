@@ -20,9 +20,8 @@ const CollectionPage = () => {
   }
   if (mainCategory === "movie") {
     return <div>
-        {movies.results ? movies.results.map(item => <div>{item.title}</div>): "loading"}
+        {movies.results ? movies.results.map((item, index) => <div key={index}>{item.title}</div>): "loading"}
     </div>;
-  } else {
   }
 
   return <div>CollectionPage</div>;

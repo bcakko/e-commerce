@@ -13,7 +13,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/profile" element={<HomePage />} />
+        <Route path="/account" element={<HomePage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route
           path="/collection/:mainCategory/:subCategory"

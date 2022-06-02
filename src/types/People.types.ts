@@ -1,6 +1,6 @@
 export interface People {
   page: number;
-  results?: Person[] | null;
+  results: Person[];
   total_pages: number;
   total_results: number;
 }

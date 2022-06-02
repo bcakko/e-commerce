@@ -20,12 +20,12 @@ const UserNav = (props: IUserNavProps) => {
         {
           title: "Settings",
           main_path: "account",
-          path: null
+          sub_path: null
         },
         {
           title: "Log Out",
           main_path: "account",
-          path: null
+          sub_path: null
         }
       ]
     }

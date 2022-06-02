@@ -11,6 +11,6 @@ export interface CollectionState {
 }
 
 export interface FilterCollectionState {
-  collection: FilterParamType | {};
+  collection: FilterParamType;
   isLoading: boolean;
 }
