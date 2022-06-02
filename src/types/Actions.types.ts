@@ -5,8 +5,8 @@ import { Shows } from "./Shows.types";
 export interface CollectionFetchAction {
   type: "GET_COLLECTION_FETCH";
   payload: {
-    mainCategory: "tv" | "movie";
-    subCategory: "popular" | "top_rated" | "on_the_air" | "upcoming";
+    mainCategory: "tv" | "movie" | string;
+    subCategory: "popular" | "top_rated" | "on_the_air" | "upcoming" | string | null;
   };
 }
 

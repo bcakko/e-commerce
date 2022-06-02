@@ -10,8 +10,8 @@ export const GET_COLLECTION_SUCCESS = "GET_COLLECTION_SUCCESS";
 export const GET_COLLECTION_FAILURE = "GET_COLLECTION_FAILURE";
 
 export const collectionFetchAction = (
-  mainCategory: "tv" | "movie",
-  subCategory: "popular" | "top_rated" | "on_the_air" | "upcoming"
+  mainCategory: string | "tv" | "movie",
+  subCategory: "popular" | "top_rated" | "on_the_air" | "upcoming" | string | null
 ): CollectionFetchAction => {
   return {
     type: "GET_COLLECTION_FETCH",

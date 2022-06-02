@@ -1,14 +1,6 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../types/RootState.types";
 import DropdownMenu from "../../UI/DropdownMenu";
 
 const NavBar = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-
-  }, []);
 
   const navLinks = [
     {
@@ -55,24 +47,27 @@ const NavBar = () => {
 
   return (
     <nav className="w-full flex justify-center bg-secondary-color text-header-main-color ">
-      <div className="sm:w-full sm:flex lg:w-11/12 font-sans font-semibold text-sm ">
-        <DropdownMenu
-          ddTitle="Movies"
-          ddTitleStyle="mr-5 cursor-pointer transition-all"
-          ddTitleHoverColor="text-header-secondary-color"
-          ddList={navLinks[0]}
-          ddListStyle="p-1 cursor-pointer hover:text-header-secondary-color transition-all"
-          ddBackgroundColor="bg-secondary-color"
-        />
-        <DropdownMenu
-          ddTitle="Shows"
-          ddTitleStyle="mr-5 cursor-pointer transition-all"
-          ddTitleHoverColor="text-header-secondary-color"
-          ddList={navLinks[1]}
-          ddListStyle="p-1 cursor-pointer hover:text-header-secondary-color transition-all"
-          ddBackgroundColor="bg-secondary-color"
-        />
-      </div>
+      {navLinks ?
+        <div className="sm:w-full sm:flex lg:w-11/12 font-sans font-semibold text-sm ">
+          <DropdownMenu
+              ddTitle="Movies"
+              ddTitleStyle="mr-5 cursor-pointer transition-all"
+              ddTitleHoverColor="text-header-secondary-color"
+              ddList={navLinks[0]}
+              ddListStyle="p-1 cursor-pointer hover:text-header-secondary-color transition-all"
+              ddBackgroundColor="bg-secondary-color"
+            />
+            <DropdownMenu
+              ddTitle="Shows"
+              ddTitleStyle="mr-5 cursor-pointer transition-all"
+              ddTitleHoverColor="text-header-secondary-color"
+              ddList={navLinks[1]}
+              ddListStyle="p-1 cursor-pointer hover:text-header-secondary-color transition-all"
+              ddBackgroundColor="bg-secondary-color"
+            />
+          </div>
+      : "Loading..."}
+
     </nav>
   );
 };

@@ -29,7 +29,7 @@ export interface IDropdownListItem {
 export interface IDropdownCategory {
     title: string,
     main_path: "movie" | "tv" | string,
-    sub_path?: string
+    sub_path?: string | null
 }
 
 export interface IMiniDropDownProps {

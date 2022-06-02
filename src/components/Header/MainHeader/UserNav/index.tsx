@@ -15,17 +15,17 @@ const UserNav = (props: IUserNavProps) => {
         {
           title: "My Account",
           main_path: "account",
-          sub_path: ""
+          sub_path: null
         },
         {
           title: "Settings",
           main_path: "account",
-          path: ""
+          path: null
         },
         {
           title: "Log Out",
           main_path: "account",
-          path: ""
+          path: null
         }
       ]
     }
