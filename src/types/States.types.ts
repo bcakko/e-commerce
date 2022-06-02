@@ -4,8 +4,8 @@ import { Shows } from "./Shows.types";
 
 export interface CollectionState {
   collection: {
-    movies: Movies | {};
-    shows: Shows | {};
+    movies: Movies;
+    shows: Shows;
   };
   isLoading: boolean;
 }

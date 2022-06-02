@@ -16,9 +16,20 @@ export interface IDropdownProps {
     ddTitle: string | JSX.Element,
     ddTitleStyle: string,
     ddTitleHoverColor: string,
-    ddList: string[],
+    ddList: IDropdownListItem,
     ddListStyle: string,
     ddBackgroundColor: string
+}
+
+export interface IDropdownListItem {
+    title: string,
+    links: IDropdownCategory[]
+}
+
+export interface IDropdownCategory {
+    title: string,
+    main_path: "movie" | "tv" | string,
+    sub_path?: string
 }
 
 export interface IMiniDropDownProps {

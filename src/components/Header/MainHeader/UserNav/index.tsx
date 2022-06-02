@@ -8,14 +8,36 @@ import { IUserNavProps } from "../../../../types/Header.types";
 
 const UserNav = (props: IUserNavProps) => {
   const { iconColor } = props;
-  const userLinks = ["My Account", "Settings", "Log out"];
+  const userLinks = [
+    {
+      title: "Account",
+      links: [
+        {
+          title: "My Account",
+          main_path: "account",
+          sub_path: ""
+        },
+        {
+          title: "Settings",
+          main_path: "account",
+          path: ""
+        },
+        {
+          title: "Log Out",
+          main_path: "account",
+          path: ""
+        }
+      ]
+    }
+  ];
+
   return ( 
     <div className={`w-40 flex justify-around ${iconColor} items-center`}>
       <DropdownMenu 
         ddTitle={
           <LinkWithIcon type="inner" path="/profile" icon={<FaUser/>} className="hover:text-side-color transition-all"/>
         } 
-        ddList={userLinks} 
+        ddList={userLinks[0]} 
         ddTitleStyle="text-xl"
         ddTitleHoverColor="text-side-color"
         ddListStyle="p-1 cursor-pointer text-sm text-secondary-color hover:text-side-color transition-all"

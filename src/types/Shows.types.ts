@@ -1,6 +1,6 @@
 export interface Shows {
   page: number;
-  results?: Show[] | null;
+  results?: Show[];
   total_pages: number;
   total_results: number;
 }
