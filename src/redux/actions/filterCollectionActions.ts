@@ -28,7 +28,6 @@ export interface FilterParamType {
   total_results: number;
 }
 
-
 export const filterCollectionSuccessAction = (
   param: FilterParamType
 ): FilterCollectionSuccessAction => {

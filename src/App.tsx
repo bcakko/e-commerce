@@ -19,7 +19,7 @@ function App() {
           path="/collection/:mainCategory/:subCategory"
           element={<CollectionPage />}
         />
-        <Route path="/detail/:mainCategory/:id" element={<DetailsPage />} />
+        <Route path="/detail/:mainCategory/:id" element={<DetailsPage/>} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />

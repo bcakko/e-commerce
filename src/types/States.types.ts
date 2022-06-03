@@ -1,6 +1,7 @@
 import { FilterParamType } from "../redux/actions/filterCollectionActions";
-import { Movies } from "./Movies.types";
-import { Shows } from "./Shows.types";
+import { Movies, Movie } from "./Movies.types";
+import { Shows, Show } from "./Shows.types";
+import { People, Person } from "./People.types";
 
 export interface CollectionState {
   collection: {
@@ -13,4 +14,9 @@ export interface CollectionState {
 export interface FilterCollectionState {
   collection: FilterParamType;
   isLoading: boolean;
+}
+
+export interface DetailState {
+  detail: FilterParamType;
+  isLoading: boolean
 }
