@@ -3,20 +3,37 @@ import { useSelector } from "react-redux";
 
 const DetailsPage = () => {
   const detail = useSelector(
-    (state: RootState) => state.detail.detail.results
+    (state: RootState) => state.detail.detail
   );
 
   console.log(detail)
 
-  // if("title" in detail.results[0])
-  // return <div>
-  //   {detail.results[0] ? 
-  //   <div>
-  //     {detail.results[0].title}
-  //   </div> : ""}
-  // </div>
+  if("title" in detail){
+    return <div>
+      {detail ? 
+      <div>
+        {detail.title}
+      </div> : ""}
+    </div>
+  }
 
-  return<div></div>
+  if("name" in detail && "profile_path" in detail){
+    return <div>
+      {detail ? <div>
+        {detail.name}
+      </div> : ""}
+    </div>
+  }
+
+  if("name" in detail && "poster_path" in detail){
+    return <div>
+      {detail ? <div>
+        {detail.name}
+      </div> : ""}
+    </div>
+  }
+
+  return <div></div>
 };
 
 export default DetailsPage;

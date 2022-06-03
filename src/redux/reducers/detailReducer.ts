@@ -4,10 +4,28 @@ import { DetailState } from "../../types/States.types";
 
 const initialState: DetailState = {
     detail: {
-        page: 0,
-        results: [],
-        total_pages: 0,
-        total_results: 0
+        adult: false,
+        backdrop_path: "",
+        profile_path: "",
+        first_air_date: "",
+        gender: 0,
+        known_for:[],
+        known_for_department: "",
+        genre_ids: [],
+        id: 0,
+        name: "",
+        origin_country: [],
+        original_language: "",
+        original_title: "",
+        original_name: "",
+        overview: "",
+        popularity: 0,
+        poster_path: "",
+        release_date: "",
+        title: "",
+        video: false,
+        vote_average: 0,
+        vote_count: 0,
     },
     isLoading: false
 }

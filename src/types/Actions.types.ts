@@ -1,4 +1,3 @@
-import { detailSuccessAction } from './../redux/actions/detailActions';
 import { FilterParamType } from "../redux/actions/filterCollectionActions";
 import { Movies, Movie } from "./Movies.types";
 import { Shows, Show } from "./Shows.types";
@@ -36,13 +35,14 @@ export interface FilterCollectionSuccessAction {
 export interface DetailFetchAction {
   type: "GET_DETAIL_FETCH";
   payload: {
-    id: string
+    id: string,
+    path: string
   }
 }
 
 export interface DetailFetchActionSuccess {
   type: "GET_DETAIL_SUCCESS";
   payload: {
-    detail: FilterParamType
+    detail: Movie | Show | Person
   }
 }

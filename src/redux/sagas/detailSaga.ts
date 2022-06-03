@@ -1,18 +1,21 @@
-import { GET_DETAIL_FETCH, GET_DETAIL_SUCCESS, detailFetchAction, detailSuccessAction } from './../actions/detailActions';
-import { FilterParamType } from "../actions/filterCollectionActions";
+import { Movie } from './../../types/Movies.types';
+import { Show } from './../../types/Shows.types';
+import { Person } from './../../types/People.types';
 import { call, put, takeEvery } from "@redux-saga/core/effects";
 import { DetailFetchAction } from '../../types/Actions.types';
+import { FilterParamType } from "../actions/filterCollectionActions";
+import { detailSuccessAction, GET_DETAIL_FETCH } from './../actions/detailActions';
 
-function detailFetch(id: string) {
+function detailFetch(id: string, path: string) {
     return fetch(
-        `https://api.themoviedb.org/3/search/multi?api_key=b5bddaa20e713df498a5886ee5424e6e&query=${id}`
+        `https://api.themoviedb.org/3/${path}/${id}?api_key=b5bddaa20e713df498a5886ee5424e6e`
     ).then(response => response.json())
 }
 
 function* workDetailFetch(action: DetailFetchAction) {
-    const collection: FilterParamType = yield call(detailFetch, action.payload.id);
+    const detail: Movie | Show | Person = yield call(detailFetch, action.payload.id, action.payload.path);
 
-    yield put(detailSuccessAction(collection))
+    yield put(detailSuccessAction(detail))
 }
 
 function* detailSaga(){

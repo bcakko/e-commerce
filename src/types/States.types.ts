@@ -17,6 +17,6 @@ export interface FilterCollectionState {
 }
 
 export interface DetailState {
-  detail: FilterParamType;
+  detail: Movie | Show | Person;
   isLoading: boolean
 }
