@@ -74,19 +74,19 @@ const SearchBar = (props: ISearchBarProps) => {
           {collection ? collection.map((item, index) => {
             if("name" in item && "poster_path" in item){
               return <li onClick={onClickHandler} key={index} data-id={item.id} data-path="tv" className="flex p-2 w-full items-center hover:bg-side-color cursor-pointer">
-                <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} className="w-10 h-10 object-contain"/>
+                <img src={item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "http://cdn.onlinewebfonts.com/svg/img_546302.png"} className="w-10 h-10 object-contain"/>
                 <span>{item.name}</span>
               </li>
             }
             if("title" in item){
               return <li onClick={onClickHandler} key={index} data-id={item.id} data-path="movie" className="flex p-2 w-full items-center hover:bg-side-color cursor-pointer">
-                <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} className="w-10 h-10 object-contain"/>
+                <img src={item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "http://cdn.onlinewebfonts.com/svg/img_546302.png"}  className="w-10 h-10 object-contain"/>
                 <span>{item.title}</span>
               </li>
             }
             if("name" in item && "profile_path" in item){
               return <li onClick={onClickHandler} key={index} data-id={item.id} data-path="person" className="flex p-2 w-full items-center hover:bg-side-color cursor-pointer">
-                <img src={`https://image.tmdb.org/t/p/w500${item.profile_path}`} className="w-10 h-10 object-contain"/>
+                <img src={item.profile_path ? `https://image.tmdb.org/t/p/w500${item.profile_path}` : "http://cdn.onlinewebfonts.com/svg/img_546302.png"}className="w-10 h-10 object-contain"/>
                 <span>{item.name}</span>
               </li>
             }
