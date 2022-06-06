@@ -46,7 +46,7 @@ const NavBar = () => {
   ]
 
   return (
-    <nav className="w-full flex justify-center bg-secondary-color text-header-main-color  absolute z-10">
+    <nav className="w-full flex justify-center bg-secondary-color text-header-main-color p-1 absolute z-10">
       {navLinks ?
         <div className="xs:w-full xs:flex lg:w-11/12 font-sans font-semibold text-sm ">
           <DropdownMenu
@@ -56,6 +56,7 @@ const NavBar = () => {
               ddList={navLinks[0]}
               ddListStyle="p-1 cursor-pointer hover:text-header-secondary-color transition-all"
               ddBackgroundColor="bg-secondary-color"
+              ddStyle="w-[200px]"
             />
             <DropdownMenu
               ddTitle="Shows"
@@ -64,6 +65,7 @@ const NavBar = () => {
               ddList={navLinks[1]}
               ddListStyle="p-1 cursor-pointer hover:text-header-secondary-color transition-all"
               ddBackgroundColor="bg-secondary-color"
+              ddStyle="w-[200px]"
             />
           </div>
       : "Loading..."}

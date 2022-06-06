@@ -5,13 +5,13 @@ import { IDropdownCategory, IDropdownProps } from "../../types/Header.types";
 import LinkWithText from "./LinkWithText";
 
 const DropdownMenu = (props: IDropdownProps) => {
-  const { ddTitle, ddTitleStyle, ddTitleHoverColor, ddList, ddListStyle, ddBackgroundColor } = props;
+  const { ddTitle, ddTitleStyle, ddTitleHoverColor, ddList, ddListStyle, ddBackgroundColor, ddStyle } = props;
   const ddRef = useRef<HTMLUListElement>(null);
   const ddTitleRef = useRef<HTMLSpanElement>(null);
   
   const showDropdown = () : void => {
     if(ddRef && ddRef.current && ddTitleRef && ddTitleRef.current !== null) {
-      ddRef.current.className = `block absolute w-full p-1 border rounded flex flex-col ${ddBackgroundColor}`;
+      ddRef.current.className = `block absolute p-1 border rounded flex flex-col ${ddBackgroundColor} ${ddStyle}`;
       ddTitleRef.current.className = `${ddTitleStyle} ${ddTitleHoverColor}`
     }
   };

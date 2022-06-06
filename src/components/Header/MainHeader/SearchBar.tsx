@@ -52,8 +52,8 @@ const SearchBar = (props: ISearchBarProps) => {
     const searchBoxString = event.target.value.toLocaleLowerCase();
     setSearchBox(searchBoxString);
     dispatch(filterCollectionFetchAction(searchBox))
-    if(searchBoxRef && searchBoxRef.current && collection.length < 4) searchBoxRef.current.className = `flex ${mainBgColor} ${mainBorderColor} w-80 h-32 overflow-auto border-2 absolute z-20`;
-    if(searchBoxRef && searchBoxRef.current && collection.length > 4) searchBoxRef.current.className = `flex ${mainBgColor} ${mainBorderColor} w-80 h-96 overflow-auto border-2 absolute z-20`;
+    if(searchBoxRef && searchBoxRef.current && collection.length < 4) searchBoxRef.current.className = `flex ${mainBgColor} ${mainBorderColor} xs:w-40 sm:w-80 h-32 overflow-auto border-2 absolute z-20`;
+    if(searchBoxRef && searchBoxRef.current && collection.length > 4) searchBoxRef.current.className = `flex ${mainBgColor} ${mainBorderColor} xs:w-40 sm:w-80 h-96 overflow-auto border-2 absolute z-20`;
   }
 
   const onClickHandler = (event: MouseEvent<HTMLLIElement>): void => {

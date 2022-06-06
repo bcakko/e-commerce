@@ -18,7 +18,8 @@ export interface IDropdownProps {
     ddTitleHoverColor: string,
     ddList: IDropdownListItem,
     ddListStyle: string,
-    ddBackgroundColor: string
+    ddBackgroundColor: string,
+    ddStyle: string
 }
 
 export interface IDropdownListItem {
