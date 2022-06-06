@@ -7,7 +7,7 @@ import { Movies } from "../../types/Movies.types";
 import { Shows } from "../../types/Shows.types";
 import { CollectionFetchAction } from "../../types/Actions.types";
 
-function collectionFetch(mainCategory: string, subCategory: string) {
+function collectionFetch(mainCategory: string, subCategory: string | null) {
   return fetch(
     `https://api.themoviedb.org/3/${mainCategory}/${subCategory}?api_key=b5bddaa20e713df498a5886ee5424e6e&language=en-US&page=1`
   ).then((response) => response.json());

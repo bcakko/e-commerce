@@ -3,6 +3,8 @@ import { MdOutlineFavoriteBorder } from "react-icons/md";
 
 import ButtonWithIcon from "./ButtonWithIcon";
 import CollectionImage from "./CollectionImage";
+import { useDispatch } from "react-redux";
+import { GET_DETAIL_FETCH } from "../../redux/actions/detailActions";
 
 const CollectionCard = (props: {
   id: number;
@@ -12,8 +14,16 @@ const CollectionCard = (props: {
   type: "movie" | "tv";
 }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const navigateToDetailsHandler = () => {
+    dispatch({
+      type: GET_DETAIL_FETCH,
+      payload: {
+        id: props.id,
+        path: props.type,
+      },
+    });
     navigate(`/details/${props.type}/${props.id}`);
   };
 
