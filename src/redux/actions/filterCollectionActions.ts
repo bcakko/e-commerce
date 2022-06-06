@@ -23,7 +23,7 @@ export const filterCollectionFetchAction = (
 
 export interface FilterParamType {
   page: number;
-  results?: (Person | Show | Movie)[] | null;
+  results: (Person | Show | Movie)[];
   total_pages: number;
   total_results: number;
 }

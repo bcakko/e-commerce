@@ -1,11 +1,11 @@
 export interface Shows {
   page: number;
-  results?: Show[] | null;
+  results: Show[];
   total_pages: number;
   total_results: number;
 }
 export interface Show {
-  backdrop_path?: string | null;
+  backdrop_path: string;
   first_air_date: string;
   genre_ids?: number[] | null;
   id: number;
