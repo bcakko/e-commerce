@@ -46,7 +46,7 @@ const NavBar = () => {
   ]
 
   return (
-    <nav className="w-full flex justify-center bg-secondary-color text-header-main-color ">
+    <nav className="w-full flex justify-center bg-secondary-color text-header-main-color  absolute z-10">
       {navLinks ?
         <div className="xs:w-full xs:flex lg:w-11/12 font-sans font-semibold text-sm ">
           <DropdownMenu
