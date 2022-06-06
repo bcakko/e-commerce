@@ -9,13 +9,13 @@ const DetailsPage = () => {
   // Movie Detail
   if("title" in detail){
     return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center mt-5">
       {detail.backdrop_path ?
-        <img src={`https://image.tmdb.org/t/p/w500${detail.backdrop_path}`} className="w-full h-full object-cover brightness-50"/>    
+        <img src={`https://image.tmdb.org/t/p/w500${detail.backdrop_path}`} className="w-full md:h-[400px] lg:h-[500px] object-cover brightness-50"/>    
       :
         <img src={`https://images.unsplash.com/photo-1614849286521-4c58b2f0ff15?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80`} className="w-full h-full object-cover brightness-50"/>      
       }
-      <div className="xs:w-3/5 sm:w-4/5 absolute">
+      <div className="xs:w-3/5 sm:w-3/5 sm:h-3/5 absolute">
         {detail ? 
           <div className="w-full h-full flex bg-header-main-color shadow-2xl">
             <div className="xs:w-full xs:h-5/12 sm:w-1/3 sm:h-full">

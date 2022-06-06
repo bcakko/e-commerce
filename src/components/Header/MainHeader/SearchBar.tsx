@@ -52,7 +52,8 @@ const SearchBar = (props: ISearchBarProps) => {
     const searchBoxString = event.target.value.toLocaleLowerCase();
     setSearchBox(searchBoxString);
     dispatch(filterCollectionFetchAction(searchBox))
-    if(searchBoxRef && searchBoxRef.current) searchBoxRef.current.className = `flex ${mainBgColor} ${mainBorderColor} w-80 h-32 overflow-auto border-2 absolute z-20`
+    if(searchBoxRef && searchBoxRef.current && collection.length < 4) searchBoxRef.current.className = `flex ${mainBgColor} ${mainBorderColor} w-80 h-32 overflow-auto border-2 absolute z-20`;
+    if(searchBoxRef && searchBoxRef.current && collection.length > 4) searchBoxRef.current.className = `flex ${mainBgColor} ${mainBorderColor} w-80 h-96 overflow-auto border-2 absolute z-20`;
   }
 
   const onClickHandler = (event: MouseEvent<HTMLLIElement>): void => {
@@ -74,7 +75,7 @@ const SearchBar = (props: ISearchBarProps) => {
           {collection ? collection.map((item, index) => {
             if("name" in item && "poster_path" in item){
               return <li onClick={onClickHandler} key={index} data-id={item.id} data-path="tv" className="flex p-2 w-full items-center hover:bg-side-color cursor-pointer">
-                <img src={item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "http://cdn.onlinewebfonts.com/svg/img_546302.png"} className="w-10 h-10 object-contain"/>
+                <img src={item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : "http://cdn.onlinewebfonts.com/svg/img_546302.png"} className={`w-10 h-10 object-contain`}/>
                 <span>{item.name}</span>
               </li>
             }

@@ -1,5 +1,4 @@
 import { DetailFetchAction, DetailFetchActionSuccess } from './../../types/Actions.types';
-import { FilterParamType } from './filterCollectionActions';
 import { Movie } from '../../types/Movies.types';
 import { Show } from '../../types/Shows.types';
 import { Person } from '../../types/People.types';
