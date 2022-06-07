@@ -24,7 +24,7 @@ const CollectionCard = (props: {
         path: props.type,
       },
     });
-    navigate(`/details/${props.type}/${props.id}`);
+    navigate(`/detail/${props.type}/${props.id}`);
   };
 
   return (
