@@ -27,7 +27,7 @@ const HomePage = () => {
   }, [dispatch]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p className="pt-16">Loading...</p>;
   }
 
   // Top picks selector
