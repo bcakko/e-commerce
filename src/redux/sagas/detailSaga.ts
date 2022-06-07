@@ -3,7 +3,6 @@ import { Show } from './../../types/Shows.types';
 import { Person } from './../../types/People.types';
 import { call, put, takeEvery } from "@redux-saga/core/effects";
 import { DetailFetchAction } from '../../types/Actions.types';
-import { FilterParamType } from "../actions/filterCollectionActions";
 import { detailSuccessAction, GET_DETAIL_FETCH } from './../actions/detailActions';
 
 function detailFetch(id: string, path: string) {

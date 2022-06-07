@@ -9,6 +9,8 @@ module.exports = {
       "header-secondary-color": "#D6B02E"
     },
     screens: {
+      xs: "280px",
+      // => @media (min-width: 250px) { ... }
       sm: "640px",
       // => @media (min-width: 640px) { ... }
       md: "765px",
@@ -24,3 +26,4 @@ module.exports = {
   },
   plugins: [],
 };
+

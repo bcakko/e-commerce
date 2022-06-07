@@ -13,13 +13,13 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/profile" element={<HomePage />} />
+        <Route path="/account" element={<HomePage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route
           path="/collection/:mainCategory/:subCategory"
           element={<CollectionPage />}
         />
-        <Route path="/details/:mainCategory/:id" element={<DetailsPage />} />
+        <Route path="/detail/:mainCategory/:id" element={<DetailsPage/>} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />

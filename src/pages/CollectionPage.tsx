@@ -1,16 +1,27 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+
+import { RootState } from "../types/RootState.types";
 
 const CollectionPage = () => {
   const { mainCategory, subCategory } = useParams();
+  const dispatch = useDispatch();
+  const movies = useSelector(
+    (state: RootState) => state.collection.collection.movies
+  );
+  const shows = useSelector(
+    (state: RootState) => state.collection.collection.shows
+  );
 
-  if (mainCategory === "shows") {
-    return <div></div>;
+  if (mainCategory === "tv") {
+    return <div>
+      {shows.results ? shows.results.map(item => <div>{item.name}</div>): "loading"}
+    </div>;
   }
-  if (mainCategory === "movies") {
-    return <div></div>;
-  } else {
+  if (mainCategory === "movie") {
+    return <div>
+        {movies.results ? movies.results.map((item, index) => <div key={index}>{item.title}</div>): "loading"}
+    </div>;
   }
 
   return <div>CollectionPage</div>;

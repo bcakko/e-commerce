@@ -10,13 +10,13 @@ const initialState: CollectionState = {
       page: 0,
       results: [],
       total_pages: 0,
-      total_results: 0,
+      total_results: 0
     },
     shows: {
       page: 0,
       results: [],
       total_pages: 0,
-      total_results: 0,
+      total_results: 0
     },
   },
   isLoading: false,
@@ -48,7 +48,7 @@ const collectionReducer = (
           isLoading: false,
           collection: {
             ...state.collection,
-            shows: action.payload.collection,
+            shows: action.payload.collection
           },
         };
       }
