@@ -7,13 +7,13 @@ const OuterLinks = () => {
         type="outer"
         path="https://www.instagram.com/muddy.store/"
         icon={<GrInstagram className="text-5xl mx-3" />}
-        className="text-main-color"
+        className="text-header-main-color"
       />
       <LinkWithIcon
         type="outer"
         path=""
         icon={<GrMail className="text-6xl mx-3" />}
-        className="text-main-color"
+        className="text-header-main-color"
       />
     </div>
   );

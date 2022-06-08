@@ -1,9 +1,9 @@
 const Trademark = () => {
   return (
-    <div className="pb-2">
+    <div className="pb-2 text-center">
       <p>
-        Fake Store 2022 ©{" "}
-        <span className="text-secondary-color">Uğur & Barış</span>
+        Fake Store 2022 ©
+        <span className="text-header-secondary-color">Uğur & Barış</span>
       </p>
     </div>
   );

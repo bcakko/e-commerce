@@ -9,7 +9,11 @@ const DetailsPage = () => {
   const { mainCategory, id } = useParams();
   const dispatch = useDispatch();
   let isUrlValid = false;
-  if (mainCategory === "tv" || mainCategory === "movie") {
+  if (
+    mainCategory === "tv" ||
+    mainCategory === "movie" ||
+    mainCategory === "person"
+  ) {
     isUrlValid = true;
   }
   const detail = useSelector((state: RootState) => state.detail.detail);

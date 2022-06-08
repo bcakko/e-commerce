@@ -66,6 +66,9 @@ const CollectionPage = () => {
           />
         </div>
       ))}
+      <div>
+        
+      </div>
     </div>
   ) : (
     <NotFoundPage />
