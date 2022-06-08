@@ -11,13 +11,21 @@ export const GET_COLLECTION_FAILURE = "GET_COLLECTION_FAILURE";
 
 export const collectionFetchAction = (
   mainCategory: string | "tv" | "movie",
-  subCategory: "popular" | "top_rated" | "on_the_air" | "upcoming" | string | null
+  subCategory:
+    | "popular"
+    | "top_rated"
+    | "on_the_air"
+    | "upcoming"
+    | string
+    | null,
+  page: number
 ): CollectionFetchAction => {
   return {
     type: "GET_COLLECTION_FETCH",
     payload: {
       mainCategory,
       subCategory,
+      page,
     },
   };
 };

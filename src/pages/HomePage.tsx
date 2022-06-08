@@ -21,8 +21,8 @@ const HomePage = () => {
   );
 
   useEffect(() => {
-    dispatch(collectionFetchAction("movie", "popular"));
-    dispatch(collectionFetchAction("tv", "popular"));
+    dispatch(collectionFetchAction("movie", "popular", 1));
+    dispatch(collectionFetchAction("tv", "popular", 1));
     dispatch(filterCollectionFetchAction("brad"));
   }, [dispatch]);
 

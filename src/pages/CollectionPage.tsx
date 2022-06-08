@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { Pagination } from "@mui/material";
 
 import CollectionCard from "../components/UI/CollectionCard";
 import { GET_COLLECTION_FETCH } from "../redux/actions/collectionActions";
@@ -11,7 +12,8 @@ import { RootState } from "../types/RootState.types";
 import NotFoundPage from "./NotFoundPage";
 
 const CollectionPage = () => {
-  const { mainCategory, subCategory } = useParams();
+  const { mainCategory, subCategory, page } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const collection = useSelector(
     (state: RootState) => state.collection.collection
@@ -43,32 +45,49 @@ const CollectionPage = () => {
         payload: {
           mainCategory,
           subCategory,
+          page: page ? +page : 1,
         },
       });
     }
-  }, [dispatch]);
+  }, [dispatch, page]);
 
   if (isUrlValid) {
     results =
       collection[collectionMap[mainCategory ? mainCategory : ""]].results;
   }
 
+  const paginationHandler = (event: any) => {
+    navigate(
+      `/collection/${mainCategory}/${subCategory}/${event.target.textContent}`
+    );
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0;
+  };
+
   return isUrlValid ? (
-    <div className="flex flex-wrap py-10">
-      {results.map((item: Movie | Show) => (
-        <div key={item.id} className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6">
-          <CollectionCard
-            id={item.id}
-            title={"title" in item ? item.title : item.name}
-            imageUrl={item.poster_path}
-            rating={item.vote_average}
-            type={"title" in item ? "movie" : "tv"}
-          />
-        </div>
-      ))}
-      <div>
-        
+    <div className="py-10">
+      <div className="flex flex-wrap pb-5">
+        {results.map((item: Movie | Show) => (
+          <div
+            key={item.id}
+            className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6"
+          >
+            <CollectionCard
+              id={item.id}
+              title={"title" in item ? item.title : item.name}
+              imageUrl={item.poster_path}
+              rating={item.vote_average}
+              type={"title" in item ? "movie" : "tv"}
+            />
+          </div>
+        ))}
       </div>
+      <Pagination
+        className="w-fit mx-auto"
+        count={50}
+        page={page ? +page : 1}
+        onChange={paginationHandler}
+      />
     </div>
   ) : (
     <NotFoundPage />

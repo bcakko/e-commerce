@@ -16,7 +16,7 @@ function App() {
         <Route path="/account" element={<HomePage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route
-          path="/collection/:mainCategory/:subCategory"
+          path="/collection/:mainCategory/:subCategory/:page"
           element={<CollectionPage />}
         />
         <Route path="/detail/:mainCategory/:id" element={<DetailsPage/>} />

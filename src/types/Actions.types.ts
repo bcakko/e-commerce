@@ -7,7 +7,14 @@ export interface CollectionFetchAction {
   type: "GET_COLLECTION_FETCH";
   payload: {
     mainCategory: "tv" | "movie" | string;
-    subCategory: "popular" | "top_rated" | "on_the_air" | "upcoming" | string | null;
+    subCategory:
+      | "popular"
+      | "top_rated"
+      | "on_the_air"
+      | "upcoming"
+      | string
+      | null;
+    page: number;
   };
 }
 
@@ -35,14 +42,14 @@ export interface FilterCollectionSuccessAction {
 export interface DetailFetchAction {
   type: "GET_DETAIL_FETCH";
   payload: {
-    id: string,
-    path: string
-  }
+    id: string;
+    path: string;
+  };
 }
 
 export interface DetailFetchActionSuccess {
   type: "GET_DETAIL_SUCCESS";
   payload: {
-    detail: Movie | Show | Person
-  }
+    detail: Movie | Show | Person;
+  };
 }
