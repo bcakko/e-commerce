@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { Pagination } from "@mui/material";
@@ -15,6 +15,9 @@ const CollectionPage = () => {
   const { mainCategory, subCategory, page } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isLoading = useSelector(
+    (state: RootState) => state.collection.isLoading
+  );
   const collection = useSelector(
     (state: RootState) => state.collection.collection
   );
@@ -49,23 +52,50 @@ const CollectionPage = () => {
         },
       });
     }
-  }, [dispatch, page]);
+  }, [dispatch, page, isUrlValid, mainCategory, subCategory]);
 
   if (isUrlValid) {
     results =
       collection[collectionMap[mainCategory ? mainCategory : ""]].results;
   }
+  if (isLoading) {
+    return <p className="mt-10">Loading...</p>;
+  }
 
   const paginationHandler = (event: any) => {
-    navigate(
-      `/collection/${mainCategory}/${subCategory}/${event.target.textContent}`
-    );
+    //! Ugur ve Can'a sor!
+    console.log(event);
+    if (!event.target.textContent) {
+      navigate(
+        `/collection/${mainCategory}/${subCategory}/${page ? +page + 1 : 1}`
+      );
+    } else
+      navigate(
+        `/collection/${mainCategory}/${subCategory}/${event.target.textContent}`
+      );
     document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0;
+    document.documentElement.scrollTop = 0; // For Chrome & Firefox
+  };
+
+  const headerTextMap: {
+    [key: string]: string;
+  } = {
+    tv: "TV Shows",
+    movie: "Movies",
+    popular: "Popular",
+    on_the_air: "On the Air",
+    top_rated: "Top Rated",
+    upcoming: "Upcoming",
   };
 
   return isUrlValid ? (
     <div className="py-10">
+      <div className="flex flex-col sm:flex-row items-center sm:justify-between px-7 ">
+        <h1 className="text-3xl font-semibold">{`${
+          subCategory ? headerTextMap[subCategory] : ""
+        } ${mainCategory ? headerTextMap[mainCategory] : ""}`}</h1>
+        <h3>Page {page}</h3>
+      </div>
       <div className="flex flex-wrap pb-5">
         {results.map((item: Movie | Show) => (
           <div
@@ -78,6 +108,7 @@ const CollectionPage = () => {
               imageUrl={item.poster_path}
               rating={item.vote_average}
               type={"title" in item ? "movie" : "tv"}
+              production={item}
             />
           </div>
         ))}
@@ -87,6 +118,11 @@ const CollectionPage = () => {
         count={50}
         page={page ? +page : 1}
         onChange={paginationHandler}
+        variant="outlined"
+        shape="rounded"
+        color="secondary"
+        hidePrevButton
+        hideNextButton
       />
     </div>
   ) : (

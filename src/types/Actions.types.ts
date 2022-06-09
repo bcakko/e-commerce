@@ -1,3 +1,4 @@
+import { addToFavoritesAction } from "./../redux/actions/favoritesActions";
 import { FilterParamType } from "../redux/actions/filterCollectionActions";
 import { Movies, Movie } from "./Movies.types";
 import { Shows, Show } from "./Shows.types";
@@ -51,5 +52,19 @@ export interface DetailFetchActionSuccess {
   type: "GET_DETAIL_SUCCESS";
   payload: {
     detail: Movie | Show | Person;
+  };
+}
+
+export interface AddToFavoritesAction {
+  type: "ADD_TO_FAVORITES";
+  payload: {
+    production: Movie | Show;
+  };
+}
+
+export interface RemoveFromFavoritesAction {
+  type: "REMOVE_FROM_FAVORITES";
+  payload: {
+    production: Movie | Show;
   };
 }

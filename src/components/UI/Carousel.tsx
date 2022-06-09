@@ -49,6 +49,7 @@ const Carousel = (props: {
               imageUrl={item["poster_path"]}
               rating={item["vote_average"]}
               type={"title" in item ? "movie" : "tv"}
+              production={item}
             />
           </SwiperSlide>
         ))}
@@ -81,6 +82,8 @@ const Carousel = (props: {
                   imageUrl={item["poster_path"]}
                   rating={item["vote_average"]}
                   type={"title" in item ? "movie" : "tv"}
+                  title={"title" in item ? item.title : item.name}
+                  production={item}
                 />
               </div>
               <div className="w-1/2">

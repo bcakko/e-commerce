@@ -44,7 +44,7 @@ const UserNav = (props: IUserNavProps) => {
         ddBackgroundColor="bg-header-main-color"
         ddStyle="mr-5 z-20 w-[150px] -ml-[128px]" 
         />
-      <LinkWithIcon type="inner" path="/favourites" icon={<FaHeart/>} className="text-xl p-1 hover:text-side-color transition-all"/>
+      <LinkWithIcon type="inner" path="/favorites" icon={<FaHeart/>} className="text-xl p-1 hover:text-side-color transition-all"/>
     </div>
   );
 };
