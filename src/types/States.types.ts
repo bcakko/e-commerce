@@ -20,3 +20,12 @@ export interface DetailState {
   detail: Movie | Show | Person;
   isLoading: boolean
 }
+
+export interface UserState {
+  isLoggedIn: boolean,
+  user: {
+    token: string,
+    id: string,
+    username: string
+  }
+}

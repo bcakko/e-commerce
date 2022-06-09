@@ -1,7 +1,8 @@
-import { CollectionState, FilterCollectionState, DetailState } from "./States.types";
+import { CollectionState, FilterCollectionState, DetailState, UserState } from "./States.types";
 
 export interface RootState {
   collection: CollectionState;
   filterCollection: FilterCollectionState;
   detail: DetailState;
+  user: UserState
 }

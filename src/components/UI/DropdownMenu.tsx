@@ -35,6 +35,7 @@ const DropdownMenu = (props: IDropdownProps) => {
             className={ddListStyle}
             data_path={item.main_path}
             data_url={item.sub_path}
+            data_action={item.data_action}
           />
         ) : <li>loading</li>}
       </ul>

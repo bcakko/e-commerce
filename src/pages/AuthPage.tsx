@@ -1,5 +1,9 @@
 import { useEffect, useState, useRef, ChangeEvent, MouseEvent } from 'react';
 import axios from 'axios';
+import { IAuthRegisterResponseType, IAuthLoginResponseType, IAuthLoginErrorType } from '../types/Auth.types';
+import { useSelector, useDispatch } from "react-redux";
+import { logUserInAction } from '../redux/actions/userActions';
+import { RootState } from '../types/RootState.types';
 
 export default function AuthPage() {
 
@@ -13,6 +17,16 @@ export default function AuthPage() {
         password: "",
         confirmPassword: ""
     })
+
+    const dispatch = useDispatch();
+    const isLoggedIn = useSelector(
+        (state: RootState) => state.user.isLoggedIn
+    );
+
+    const user = useSelector(
+        (state: RootState) => state.user.user
+    );
+
 
     const messageRef = useRef<HTMLSpanElement>(null);
 
@@ -58,8 +72,7 @@ export default function AuthPage() {
             username: userInputs.username,
             password: userInputs.password
         })
-            .then((response:any) => {
-                console.log(response.data)
+            .then((response:IAuthRegisterResponseType) => {
                 messageHandler(null)
                 loginUser();
             })
@@ -74,16 +87,24 @@ export default function AuthPage() {
             username: userInputs.username,
             password: userInputs.password
         })
-            .then((response:any) => {
-                console.log(response)
+            .then((response:IAuthLoginResponseType) => {
                 messageHandler(null)
                 setAuth({login: true, register: false})
-                localStorage.setItem("token", response.data.token)
-                localStorage.setItem("id", response.data.user._id)
-                localStorage.setItem("username", response.data.user.username)
+                const localData = {
+                    "token": response.data.token,
+                    "id": response.data.user._id,
+                    "username": response.data.user.username
+                }
+                const userData = {
+                    token: response.data.token,
+                    id: response.data.user._id,
+                    username: response.data.user.username
+                }
+                localStorage.setItem("user", JSON.stringify(localData))
+                dispatch(logUserInAction(userData))
 
             })
-            .catch((error:any) => {
+            .catch((error:IAuthLoginErrorType) => {
                 console.log(error)
                 messageHandler(error.response.data.message);
             })
@@ -141,7 +162,7 @@ return (
             <button onClick={onSubmit} className="xs:w-full p-1 rounded-md bg-main-color hover:bg-secondary-color 0transition-all ease-in">{auth.register ? "REGISTER" : "LOGIN"}</button>
             <div className="xs:w-full xs:flex xs:flex-col xs:items-center xs:mt-2">
                 <span className="xs:text-xs sm:text-sm xs:opacity-50">{auth.register ? "Do you have an account?" : "Don't you have an account?"}</span>
-                <span onClick={changeAuth} className="xs:text-sm xs:opacity-75">{auth.register ? "LOGIN" : "REGISTER"}</span>
+                <span onClick={changeAuth} className="xs:text-sm xs:opacity-75 cursor-pointer">{auth.register ? "LOGIN" : "REGISTER"}</span>
             </div>
         </div>
     </div>

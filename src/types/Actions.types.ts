@@ -2,6 +2,7 @@ import { FilterParamType } from "../redux/actions/filterCollectionActions";
 import { Movies, Movie } from "./Movies.types";
 import { Shows, Show } from "./Shows.types";
 import { People, Person } from "./People.types";
+import { User } from "./UserType";
 
 export interface CollectionFetchAction {
   type: "GET_COLLECTION_FETCH";
@@ -45,4 +46,15 @@ export interface DetailFetchActionSuccess {
   payload: {
     detail: Movie | Show | Person
   }
+}
+
+export interface LogUserInAction {
+  type: "LOG_USER_IN";
+  payload: {
+    user: User
+  }
+}
+
+export interface LogUserOutAction {
+  type: "LOG_USER_OUT";
 }

@@ -6,6 +6,7 @@ import CollectionPage from "./pages/CollectionPage";
 import DetailsPage from "./pages/DetailsPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import HomePage from "./pages/HomePage";
+import AuthPage from "./pages/AuthPage";
 import NotFoundPage from "./pages/NotFoundPage";
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/account" element={<HomePage />} />
+        <Route path="/auth" element={<AuthPage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
         <Route
           path="/collection/:mainCategory/:subCategory"
