@@ -136,7 +136,7 @@ export default function AuthPage() {
 return (
 <div
     className="xs:w-full xs:h-[65vh] xs:mt-7 xs:flex xs:justify-center xs:items-center bg-gradient-to-b from-main-color to-side-color text-header-main-color">
-    <div className={`${auth.login ? "xs:h-2/4" : "xs:h-2/3"} xs:w-[70%] sm:w-2/5 lg:w-1/4 xl:w-[25%] absolute xs:flex xs:flex-col items-center justify-around shadow-lg p-5 transition-all ease-in`}>
+    <div className={`${auth.login ? "xs:h-2/4" : "xs:h-[55%]"} xs:w-[70%] sm:w-2/5 lg:w-1/4 xl:w-[25%] absolute xs:flex xs:flex-col items-center justify-around shadow-lg p-5 transition-all ease-in`}>
         <div className="xs:w-full xs:flex xs:flex-col">
             <span className="xs:opacity-75">User name : </span>
             <input type="username" onChange={onInputChange} data-type="setUsername" className="outline-0 p-1 border-b border-side-color" style={ {background: "none" } } placeholder="FakeUser" />

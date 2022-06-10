@@ -52,8 +52,8 @@ const SearchBar = (props: ISearchBarProps) => {
     const searchBoxString = event.target.value.toLocaleLowerCase();
     setSearchBox(searchBoxString);
     dispatch(filterCollectionFetchAction(searchBox))
-    if(searchBoxRef && searchBoxRef.current && collection.length < 4) searchBoxRef.current.className = `flex ${mainBgColor} ${mainBorderColor} xs:w-40 sm:w-80 h-32 overflow-auto border-2 absolute z-20`;
-    if(searchBoxRef && searchBoxRef.current && collection.length > 4) searchBoxRef.current.className = `flex ${mainBgColor} ${mainBorderColor} xs:w-40 sm:w-80 h-96 overflow-auto border-2 absolute z-20`;
+    if(searchBoxRef && searchBoxRef.current && collection.length < 4) searchBoxRef.current.className = `flex ${mainBgColor} ${mainBorderColor} xs:w-40 sm:w-80 h-32 overflow-auto rounded-b-lg absolute z-20`;
+    if(searchBoxRef && searchBoxRef.current && collection.length > 4) searchBoxRef.current.className = `flex ${mainBgColor} ${mainBorderColor} xs:w-40 sm:w-80 h-96 overflow-auto rounded-b-lg absolute z-20`;
   }
 
   const onClickHandler = (event: MouseEvent<HTMLLIElement>): void => {
@@ -66,8 +66,8 @@ const SearchBar = (props: ISearchBarProps) => {
 
   return (
     <div className={`${mainWidth} h-8`}>
-      <div className={`${mainWidth} ${mainBorderColor} ${mainTextColor} ${mainBgColor} border-2 overflow-hidden flex items-center p-1`}>
-        <input onChange={onSearchChange} type="search" placeholder="what are you looking for?" className={`${inputPlaceholderColor} ${inputTextColor} ${inputBgColor} w-full p-1 focus:outline-none`}/>
+      <div className={`${mainWidth} ${mainTextColor} overflow-hidden flex items-center p-1`}>
+        <input onChange={onSearchChange} type="search" placeholder="what are you looking for?" className={`${inputPlaceholderColor} ${inputTextColor} w-full p-1 focus:outline-none`}/>
         <FiSearch className="xs:text-3xl md:text-xl"/>
       </div>
       <div ref={searchBoxRef} className={`hidden`}>

@@ -17,13 +17,29 @@ import { useNavigate } from "react-router-dom";
 const UserNav = (props: IUserNavProps) => {
   const { iconColor } = props;
 
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(
+    (state: RootState) => state.user.isLoggedIn
+  );
+
+  const user = useSelector(
+    (state: RootState) => state.user.user
+  );
+
+  // Routing
+  const navigate = useNavigate();
+  const routeChange = () => {
+    let path : string = `/`;
+    navigate(path);
+  }
+
   const userLinks = [
     {
       title: "Account",
       links: [
         {
-          title: "My Account",
-          main_path: "account",
+          title: user.username,
+          main_path: "",
           sub_path: null
         },
         {
@@ -41,21 +57,7 @@ const UserNav = (props: IUserNavProps) => {
     }
   ];
 
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector(
-    (state: RootState) => state.user.isLoggedIn
-  );
 
-  const user = useSelector(
-    (state: RootState) => state.user.user
-  );
-
-  // Routing
-  const navigate = useNavigate();
-  const routeChange = () => {
-    let path : string = `/`;
-    navigate(path);
-  }
 
   useEffect(()=> {
     let localData;
@@ -79,7 +81,7 @@ const UserNav = (props: IUserNavProps) => {
           ddBackgroundColor="bg-header-main-color"
           ddStyle="mr-5 z-20 w-[150px] -ml-[128px]" 
         />
-      : <Link to="/auth">Signin</Link>}
+      : <Link to="/auth" className="hover:text-side-color transition-all ease-in">Signin</Link>}
 
       <LinkWithIcon type="inner" path="/favourites" icon={<FaHeart/>} className="text-xl p-1 hover:text-side-color transition-all"/>
     </div>

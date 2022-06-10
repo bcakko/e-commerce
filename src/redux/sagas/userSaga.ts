@@ -8,7 +8,7 @@ import { call, put, takeEvery } from "@redux-saga/core/effects";
 async function logUserIn(id:string){
     try{
         const response = await axios.get(`http://localhost:4000/api/getOne/${id}`);
-        return response;
+        return response.data;
     } catch (error){
         console.log(error)
     }
