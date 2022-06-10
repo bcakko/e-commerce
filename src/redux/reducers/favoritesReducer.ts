@@ -7,10 +7,13 @@ import {
   REMOVE_FROM_FAVORITES,
 } from "../actions/favoritesActions";
 
+const savedFavoritesJSON = localStorage.getItem("favorites");
+const savedFavorites = savedFavoritesJSON ? JSON.parse(savedFavoritesJSON) : [];
+
 const initialState: {
   favorites: (Movie | Show)[];
 } = {
-  favorites: [],
+  favorites: savedFavorites,
 };
 
 const favoritesReducer = (
@@ -21,6 +24,8 @@ const favoritesReducer = (
     case ADD_TO_FAVORITES:
       const updatedFavorites = [...state.favorites];
       updatedFavorites.push(action.payload.production);
+
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
       return {
         ...state,
         favorites: updatedFavorites,
@@ -33,7 +38,7 @@ const favoritesReducer = (
           ? e.title !== action.payload.production.title
           : e.name !== action.payload.production.name
       );
-
+      localStorage.setItem("favorites", JSON.stringify(newFavorites));
       return {
         ...state,
         favorites: newFavorites,
