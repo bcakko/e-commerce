@@ -16,8 +16,6 @@ const DetailsPage = () => {
   ) {
     isUrlValid = true;
   }
-  const detail = useSelector((state: RootState) => state.detail.detail);
-
   useEffect(() => {
     dispatch({
       type: GET_DETAIL_FETCH,
@@ -26,7 +24,9 @@ const DetailsPage = () => {
         path: mainCategory,
       },
     });
-  }, [dispatch]);
+  }, [dispatch, mainCategory, id]);
+  const detail = useSelector((state: RootState) => state.detail.detail);
+  console.log(detail);
 
   if (
     !isUrlValid ||

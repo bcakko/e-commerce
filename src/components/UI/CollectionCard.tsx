@@ -40,13 +40,12 @@ const CollectionCard = (props: {
   };
 
   return (
-    <div className="w-full p-3 text-left">
-      <div className="h-full flex flex-col justify-between items-stretch">
+    <div className="w-full h-full p-3 text-left">
+      <div className="h-full flex flex-col justify-between items-stretch bg-main-color rounded-lg">
         <CollectionImage
           className="cursor-pointer object-contain w-full rounded-t-lg"
           url={props.imageUrl}
           onClick={navigateToDetailsHandler}
-          //? data-path={props.title ? "movie" : "tv"}
         />
         <div className="px-3 bg-main-color text-header-main-color rounded-b-lg pt-5">
           <p className="truncate font-semibold">{props.title}</p>
