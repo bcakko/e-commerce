@@ -1,90 +1,121 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 // Components
 import LinkWithIcon from "../../../UI/LinkWithIcon";
-import MiniCart from "./MiniCart";
+import MiniFav from "./MiniFav";
 import DropdownMenu from "../../../UI/DropdownMenu";
 import { FaHeart, FaUser } from "react-icons/fa"
 // Types
 import { RootState } from "../../../../types/RootState.types";
-import { IUserNavProps } from "../../../../types/Header.types";
-import { Link } from "react-router-dom";
+import { IUserNavProps, IMiniDropDownProps } from "../../../../types/Header.types";
+import { Movie } from "../../../../types/Movies.types";
+import { Show } from "../../../../types/Shows.types";
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 import { logUserInAction, logUserOutAction } from "../../../../redux/actions/userActions";
 // Router
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const UserNav = (props: IUserNavProps) => {
   const { iconColor } = props;
 
+  // Redux
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(
-    (state: RootState) => state.user.isLoggedIn
+  (state: RootState) => state.user.isLoggedIn
+  );
+  const user = useSelector(
+  (state: RootState) => state.user.user
   );
 
-  const user = useSelector(
-    (state: RootState) => state.user.user
-  );
+  const favs = useSelector(
+    (state: RootState) => state.favorites.favorites
+  )
+
+  // Ref
+  const miniFavRef = useRef<HTMLDivElement>(null);
+  const miniFavListRef = useRef<HTMLDivElement>(null);
+  const showDropdown = () : void => {
+  if(miniFavListRef && miniFavListRef.current !== null) {
+    miniFavListRef.current.className = `block`;
+  }
+  };
+
+  const hideDropdown = () : void => {
+    if(miniFavListRef && miniFavListRef.current !== null) {
+      miniFavListRef.current.className = "hidden";
+    }
+  };
 
   // Routing
   const navigate = useNavigate();
   const routeChange = () => {
     let path : string = `/`;
-    navigate(path);
+      navigate(path);
   }
 
+  let [favorites, setFavorites] = useState<(Movie | Show)[]>();
+
   const userLinks = [
-    {
+      {
       title: "Account",
       links: [
-        {
-          title: user.username,
-          main_path: "",
-          sub_path: null
-        },
-        {
-          title: "Settings",
-          main_path: "account",
-          sub_path: null
-        },
-        {
-          title: "Log Out",
-          main_path: "",
-          sub_path: null,
-          data_action: () => {localStorage.removeItem("user"); dispatch(logUserOutAction()); routeChange();}
-        }
+      {
+      title: user.username,
+      main_path: "",
+      sub_path: null
+      },
+      {
+      title: "Settings",
+      main_path: "account",
+      sub_path: null
+      },
+      {
+      title: "Log Out",
+      main_path: "",
+      sub_path: null,
+      data_action: () => {localStorage.removeItem("user"); dispatch(logUserOutAction()); routeChange();}
+      }
       ]
-    }
+      }
   ];
 
-
-
   useEffect(()=> {
-    let localData;
-    if(localStorage.hasOwnProperty("user")) {localData = localStorage.getItem("user");}
-    let newLocalData;
-    if(localData!==undefined && localData!==null) newLocalData = JSON.parse(localData)
-    if(newLocalData!==undefined && newLocalData.id!==null) dispatch(logUserInAction(newLocalData.id))
+    let userData;
+    if(localStorage.hasOwnProperty("user")) {userData = localStorage.getItem("user");}
+    let newUserData;
+    if(userData!==undefined && userData!==null) newUserData = JSON.parse(userData)
+    if(newUserData!==undefined && newUserData.id!==null) dispatch(logUserInAction(newUserData.id))
+    let favData;
+    if(localStorage.hasOwnProperty("favorites")) {favData = localStorage.getItem("favorites")}
+    let newFavData;
+    if(favData!==undefined && favData!==null) newFavData = JSON.parse(favData);
+    if(favs!==undefined && favs!==null) setFavorites(favs)
   },[])
 
-  return ( 
-    <div className={`w-24 flex justify-around ${iconColor} items-center`}>
-      {isLoggedIn ?
-        <DropdownMenu 
-          ddTitle={
-             <FaUser className="hover:text-side-color transition-all"/>
-          } 
-          ddList={userLinks[0]} 
-          ddTitleStyle="text-xl"
-          ddTitleHoverColor="text-side-color"
-          ddListStyle="p-1 cursor-pointer text-sm text-secondary-color hover:text-side-color transition-all"
-          ddBackgroundColor="bg-header-main-color"
-          ddStyle="mr-5 z-20 w-[150px] -ml-[128px]" 
+      return (
+      <div className={`w-24 flex justify-around ${iconColor} items-center`}>
+        {isLoggedIn ?
+        <DropdownMenu ddTitle={ <FaUser className="hover:text-side-color transition-all" />
+        }
+        ddList={userLinks[0]}
+        ddTitleStyle="text-xl"
+        ddTitleHoverColor="text-side-color"
+        ddListStyle="p-1 cursor-pointer text-sm text-secondary-color hover:text-side-color transition-all"
+        ddBackgroundColor="bg-header-main-color"
+        ddStyle="mr-5 z-20 w-[150px] -ml-[128px]"
         />
-      : <Link to="/auth" className="hover:text-side-color transition-all ease-in">Signin</Link>}
+        :
+        <Link to="/auth" className="hover:text-side-color transition-all ease-in">Signin</Link>}
 
-      <LinkWithIcon type="inner" path="/favorites" icon={<FaHeart/>} className="text-xl p-1 hover:text-side-color transition-all"/>
-    </div>
+        <div ref={miniFavRef} onMouseEnter={()=> showDropdown()} onMouseLeave={()=> hideDropdown()} className="xs:flex
+          items-center">
+          <LinkWithIcon type="inner" path="/favorites" icon={<FaHeart />} className="text-xl p-1 hover:text-side-color
+          transition-all"/>
+          <div ref={miniFavListRef} className="hidden">
+            <MiniFav data_fav={favorites} />
+          </div>
+        </div>
+      </div>
   );
 };
 

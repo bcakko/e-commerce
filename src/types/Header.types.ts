@@ -1,10 +1,13 @@
+import { Movie } from "./Movies.types"
+import { Show } from "./Shows.types"
+
 export interface ISearchBarProps {
     mainWidth: string,
-    mainBorderColor: string,
+    mainBorderColor?: string,
     mainTextColor: string,
-    mainBgColor: string,
+    mainBgColor?: string,
     inputTextColor: string,
-    inputBgColor: string,
+    inputBgColor?: string,
     inputPlaceholderColor: string
 }
 
@@ -35,5 +38,5 @@ export interface IDropdownCategory {
 }
 
 export interface IMiniDropDownProps {
-    ddUser?: string[]
+    data_fav?: (Movie | Show)[];
 }
