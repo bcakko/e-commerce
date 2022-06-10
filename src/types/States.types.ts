@@ -24,3 +24,12 @@ export interface DetailState {
 export interface FavoritesState {
   favorites: (Movie | Show)[];
 }
+
+export interface UserState {
+  isLoggedIn: boolean,
+  user: {
+    token: string,
+    id: string,
+    username: string
+  }
+}

@@ -3,6 +3,7 @@ import { FilterParamType } from "../redux/actions/filterCollectionActions";
 import { Movies, Movie } from "./Movies.types";
 import { Shows, Show } from "./Shows.types";
 import { People, Person } from "./People.types";
+import { User } from "./UserType";
 
 export interface CollectionFetchAction {
   type: "GET_COLLECTION_FETCH";
@@ -67,4 +68,22 @@ export interface RemoveFromFavoritesAction {
   payload: {
     production: Movie | Show;
   };
+}
+
+export interface LogUserInAction {
+  type: "LOG_USER_IN";
+  payload: {
+    id: string
+  }
+}
+
+export interface LogUserInSuccessAction {
+  type: "LOG_USER_IN_SUCCESS";
+  payload: {
+    user: User
+  }
+}
+
+export interface LogUserOutAction {
+  type: "LOG_USER_OUT";
 }

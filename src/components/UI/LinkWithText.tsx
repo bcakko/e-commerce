@@ -7,8 +7,9 @@ const LinkWithText = (props: {
   type: "inner" | "outer";
   text: string;
   className?: string;
-  data_path: string;
+  data_path: string | null;
   data_url?: string | null;
+  data_action?: any
 }) => {
   const dispatch = useDispatch();
 
@@ -20,7 +21,15 @@ const LinkWithText = (props: {
       dispatch(collectionFetchAction(mainPath, subPath, 1));
   };
 
-  if (props.type === "inner" && props.data_url) {
+  if (props.type === "inner" && props.data_action) {
+    return(
+      <NavLink onClick={props.data_action} to="/" className={props.className}>
+        {props.text}
+      </NavLink>
+    )
+  }
+
+  else if (props.type === "inner" && props.data_url) {
     return (
       <NavLink
         onClick={onClickHandler}
@@ -33,17 +42,17 @@ const LinkWithText = (props: {
       </NavLink>
     );
   } else if (props.type === "inner" && props.data_url === null) {
-    return (
-      <NavLink
-        onClick={onClickHandler}
-        to={`/${props.data_path}`}
-        data-path={props.data_path}
-        className={props.className}
-      >
-        {props.text}
-      </NavLink>
-    );
-  }
-  return <div className={props.className}>{props.text}</div>;
+    return(
+    <NavLink onClick={onClickHandler} to={`/${props.data_path}`} data-path={props.data_path}
+    className={props.className}>
+      {props.text}
+    </NavLink>
+    )
+  } else 
+  return (
+    <div className={props.className}>
+      {props.text}
+    </div>
+  );
 };
 export default LinkWithText;
