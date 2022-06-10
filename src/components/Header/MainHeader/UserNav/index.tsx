@@ -10,7 +10,9 @@ import { IUserNavProps } from "../../../../types/Header.types";
 import { Link } from "react-router-dom";
 // Redux
 import { useSelector, useDispatch } from "react-redux";
-
+import { logUserInAction, logUserOutAction } from "../../../../redux/actions/userActions";
+// Router
+import { useNavigate } from "react-router-dom";
 
 const UserNav = (props: IUserNavProps) => {
   const { iconColor } = props;
@@ -33,7 +35,7 @@ const UserNav = (props: IUserNavProps) => {
           title: "Log Out",
           main_path: "",
           sub_path: null,
-          data_action: () => localStorage.removeItem("user")
+          data_action: () => {localStorage.removeItem("user"); dispatch(logUserOutAction()); routeChange();}
         }
       ]
     }
@@ -48,24 +50,24 @@ const UserNav = (props: IUserNavProps) => {
     (state: RootState) => state.user.user
   );
 
-
-  let [token, setToken] = useState<null|string>();
-
-  let localData = null;
+  // Routing
+  const navigate = useNavigate();
+  const routeChange = () => {
+    let path : string = `/`;
+    navigate(path);
+  }
 
   useEffect(()=> {
-    localData = (localStorage.getItem("user"))
-    if(localData != null) {
-      localData = JSON.parse(localData)
-      setToken(localData.token)
-    }
+    let localData;
+    if(localStorage.hasOwnProperty("user")) {localData = localStorage.getItem("user");}
+    let newLocalData;
+    if(localData!==undefined && localData!==null) newLocalData = JSON.parse(localData)
+    if(newLocalData!==undefined && newLocalData.id!==null) dispatch(logUserInAction(newLocalData.id))
   },[])
-
-
 
   return ( 
     <div className={`w-24 flex justify-around ${iconColor} items-center`}>
-      {token!=null ?
+      {isLoggedIn ?
         <DropdownMenu 
           ddTitle={
              <FaUser className="hover:text-side-color transition-all"/>

@@ -1,22 +1,27 @@
+import { User } from './../../types/UserType';
+import axios from 'axios';
 import { LogUserInAction } from './../../types/Actions.types';
-import { logUserInAction, LOG_USER_IN } from './../actions/userActions';
+import { logUserInSuccessAction, LOG_USER_IN } from './../actions/userActions';
 
 import { call, put, takeEvery } from "@redux-saga/core/effects";
 
-import { User } from '../../types/UserType';
+async function logUserIn(id:string){
+    try{
+        const response = await axios.get(`http://localhost:4000/api/getOne/${id}`);
+        return response;
+    } catch (error){
+        console.log(error)
+    }
 
-function logUserIn(user:User){
-    console.log(user)
-    const userData = user;
-    return userData;
 }
 
 function* workLogUserIn(action: LogUserInAction) {
     const user: User = yield call(
         logUserIn,
-        action.payload.user
+        action.payload.id
     );
-    yield put(logUserInAction(user));
+    //? this leads to infinite loop
+    yield put(logUserInSuccessAction(user));
 }
 
 function* userSaga(){

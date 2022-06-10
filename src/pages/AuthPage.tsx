@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef, ChangeEvent, MouseEvent } from 'react';
 import axios from 'axios';
 import { IAuthRegisterResponseType, IAuthLoginResponseType, IAuthLoginErrorType } from '../types/Auth.types';
-import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+// Redux
+import { useDispatch } from 'react-redux';
 import { logUserInAction } from '../redux/actions/userActions';
-import { RootState } from '../types/RootState.types';
-
 export default function AuthPage() {
 
     let [auth, setAuth] = useState({
@@ -18,17 +18,14 @@ export default function AuthPage() {
         confirmPassword: ""
     })
 
-    const dispatch = useDispatch();
-    const isLoggedIn = useSelector(
-        (state: RootState) => state.user.isLoggedIn
-    );
-
-    const user = useSelector(
-        (state: RootState) => state.user.user
-    );
-
-
     const messageRef = useRef<HTMLSpanElement>(null);
+    const dispatch = useDispatch();
+    // Routing
+    const navigate = useNavigate();
+    const routeChange = () => {
+    let path : string = `/`;
+        navigate(path);
+    }
 
     const changeAuth = (event: MouseEvent<HTMLSpanElement>): void => {
         if(auth.login) {
@@ -95,14 +92,9 @@ export default function AuthPage() {
                     "id": response.data.user._id,
                     "username": response.data.user.username
                 }
-                const userData = {
-                    token: response.data.token,
-                    id: response.data.user._id,
-                    username: response.data.user.username
-                }
-                localStorage.setItem("user", JSON.stringify(localData))
-                dispatch(logUserInAction(userData))
 
+                localStorage.setItem("user", JSON.stringify(localData))
+                if(response)dispatch(logUserInAction(response.data.user._id))
             })
             .catch((error:IAuthLoginErrorType) => {
                 console.log(error)
@@ -116,6 +108,8 @@ export default function AuthPage() {
         if(auth.login){
             if(userInputs.username.length && userInputs.password.length >= 4){
                 loginUser();
+                routeChange();
+                
             }else{
                 messageHandler("inputs are weak")
                 console.log("inputs are weak")
@@ -124,6 +118,7 @@ export default function AuthPage() {
             if(userInputs.username.length && userInputs.password.length && userInputs.confirmPassword.length >= 4){
                 if(userInputs.password === userInputs.confirmPassword){
                     registerUser();
+                    routeChange();
                 }else{
                     messageHandler("passwords don't match")
                     console.log("passwords don't match")
@@ -141,7 +136,7 @@ export default function AuthPage() {
 return (
 <div
     className="xs:w-full xs:h-[65vh] xs:mt-7 xs:flex xs:justify-center xs:items-center bg-gradient-to-b from-main-color to-side-color text-header-main-color">
-    <div className={`${auth.login ? "xs:h-1/4" : "xs:h-1/3"} xs:w-[70%] sm:w-2/5 lg:w-1/4 xl:w-[25%] absolute xs:flex xs:flex-col items-center justify-around shadow-lg p-5 transition-all ease-in`}>
+    <div className={`${auth.login ? "xs:h-2/4" : "xs:h-2/3"} xs:w-[70%] sm:w-2/5 lg:w-1/4 xl:w-[25%] absolute xs:flex xs:flex-col items-center justify-around shadow-lg p-5 transition-all ease-in`}>
         <div className="xs:w-full xs:flex xs:flex-col">
             <span className="xs:opacity-75">User name : </span>
             <input type="username" onChange={onInputChange} data-type="setUsername" className="outline-0 p-1 border-b border-side-color" style={ {background: "none" } } placeholder="FakeUser" />

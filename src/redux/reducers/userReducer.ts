@@ -1,6 +1,6 @@
 import { UserState } from "../../types/States.types";
 import { AnyAction } from "redux";
-import { LOG_USER_IN, LOG_USER_OUT } from "../actions/userActions";
+import { LOG_USER_IN, LOG_USER_IN_SUCCESS ,LOG_USER_OUT } from "../actions/userActions";
 
 const initialState: UserState = {
     isLoggedIn: false,
@@ -16,9 +16,7 @@ const userReducer = (
     action: AnyAction
 ): UserState => {
     switch (action.type) {
-        case LOG_USER_IN:
-            console.log(action.payload)
-
+        case LOG_USER_IN_SUCCESS:
             return {
                 ...state, isLoggedIn: true, user: action.payload.user
             }

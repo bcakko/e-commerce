@@ -31,7 +31,7 @@ export interface IDropdownCategory {
     title: string,
     main_path: "movie" | "tv" | string | null,
     sub_path?: string | null,
-    data_action?(): void 
+    data_action?(): void
 }
 
 export interface IMiniDropDownProps {

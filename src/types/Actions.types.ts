@@ -51,6 +51,13 @@ export interface DetailFetchActionSuccess {
 export interface LogUserInAction {
   type: "LOG_USER_IN";
   payload: {
+    id: string
+  }
+}
+
+export interface LogUserInSuccessAction {
+  type: "LOG_USER_IN_SUCCESS";
+  payload: {
     user: User
   }
 }
