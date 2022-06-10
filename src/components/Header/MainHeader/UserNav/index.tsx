@@ -83,7 +83,7 @@ const UserNav = (props: IUserNavProps) => {
         />
       : <Link to="/auth" className="hover:text-side-color transition-all ease-in">Signin</Link>}
 
-      <LinkWithIcon type="inner" path="/favourites" icon={<FaHeart/>} className="text-xl p-1 hover:text-side-color transition-all"/>
+      <LinkWithIcon type="inner" path="/favorites" icon={<FaHeart/>} className="text-xl p-1 hover:text-side-color transition-all"/>
     </div>
   );
 };

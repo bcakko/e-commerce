@@ -20,7 +20,6 @@ function* workLogUserIn(action: LogUserInAction) {
         logUserIn,
         action.payload.id
     );
-    //? this leads to infinite loop
     yield put(logUserInSuccessAction(user));
 }
 
