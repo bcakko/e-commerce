@@ -24,7 +24,7 @@ const DropdownMenu = (props: IDropdownProps) => {
   };
 
   return (
-    <div onMouseEnter={()=> showDropdown()} onMouseLeave={()=> hideDropdown()}>
+    <div onMouseEnter={()=> showDropdown()} onMouseLeave={()=> hideDropdown()} className='z-30'>
       <span ref={ddTitleRef} className={ddTitleStyle}>{ddTitle}</span>
       <ul ref={ddRef} className="hidden">
         {ddList.links ? ddList.links.map((item: IDropdownCategory, index: number) =>

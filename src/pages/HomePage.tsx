@@ -21,13 +21,13 @@ const HomePage = () => {
   );
 
   useEffect(() => {
-    dispatch(collectionFetchAction("movie", "popular"));
-    dispatch(collectionFetchAction("tv", "popular"));
+    dispatch(collectionFetchAction("movie", "popular", 1));
+    dispatch(collectionFetchAction("tv", "popular", 1));
     dispatch(filterCollectionFetchAction("brad"));
   }, [dispatch]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p className="pt-16">Loading...</p>;
   }
 
   // Top picks selector

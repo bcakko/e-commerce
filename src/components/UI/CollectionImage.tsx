@@ -6,7 +6,11 @@ const CollectionImage = (props: {
   return (
     <img
       className={props.className}
-      src={`https://image.tmdb.org/t/p/original/${props.url}`}
+      src={
+        props.url
+          ? `https://image.tmdb.org/t/p/original/${props.url}`
+          : "http://cdn.onlinewebfonts.com/svg/img_546302.png"
+      }
       alt="poster/backdrop"
       onClick={props.onClick}
     />

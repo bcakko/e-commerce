@@ -49,6 +49,7 @@ const Carousel = (props: {
               imageUrl={item["poster_path"]}
               rating={item["vote_average"]}
               type={"title" in item ? "movie" : "tv"}
+              production={item}
             />
           </SwiperSlide>
         ))}
@@ -81,10 +82,12 @@ const Carousel = (props: {
                   imageUrl={item["poster_path"]}
                   rating={item["vote_average"]}
                   type={"title" in item ? "movie" : "tv"}
+                  title={"title" in item ? item.title : item.name}
+                  production={item}
                 />
               </div>
               <div className="w-1/2">
-                <h1 className="font-bold text-2xl cursor-pointer md:text-4xl md:pb-8">
+                <h1 className="font-bold text-2xl md:text-4xl md:pb-8">
                   {"title" in item ? item.title : item.name}
                 </h1>
                 <p className="md:text-xl h-[170px] overflow-hidden overflow-y-scroll">

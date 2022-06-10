@@ -1,3 +1,4 @@
+import { addToFavoritesAction } from "./../redux/actions/favoritesActions";
 import { FilterParamType } from "../redux/actions/filterCollectionActions";
 import { Movies, Movie } from "./Movies.types";
 import { Shows, Show } from "./Shows.types";
@@ -7,7 +8,14 @@ export interface CollectionFetchAction {
   type: "GET_COLLECTION_FETCH";
   payload: {
     mainCategory: "tv" | "movie" | string;
-    subCategory: "popular" | "top_rated" | "on_the_air" | "upcoming" | string | null;
+    subCategory:
+      | "popular"
+      | "top_rated"
+      | "on_the_air"
+      | "upcoming"
+      | string
+      | null;
+    page: number;
   };
 }
 
@@ -35,14 +43,28 @@ export interface FilterCollectionSuccessAction {
 export interface DetailFetchAction {
   type: "GET_DETAIL_FETCH";
   payload: {
-    id: string,
-    path: string
-  }
+    id: string;
+    path: string;
+  };
 }
 
 export interface DetailFetchActionSuccess {
   type: "GET_DETAIL_SUCCESS";
   payload: {
-    detail: Movie | Show | Person
-  }
+    detail: Movie | Show | Person;
+  };
+}
+
+export interface AddToFavoritesAction {
+  type: "ADD_TO_FAVORITES";
+  payload: {
+    production: Movie | Show;
+  };
+}
+
+export interface RemoveFromFavoritesAction {
+  type: "REMOVE_FROM_FAVORITES";
+  payload: {
+    production: Movie | Show;
+  };
 }

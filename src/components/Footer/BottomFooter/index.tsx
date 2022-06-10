@@ -3,7 +3,7 @@ import Trademark from "./Trademark";
 
 const BottomFooter = () => {
   return (
-    <div className="border-t-secondary-color border-t-2">
+    <div className="border-t-2 border-t-header-main-color">
       <OuterLinks />
       <Trademark />
     </div>

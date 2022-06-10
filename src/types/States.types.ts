@@ -18,5 +18,9 @@ export interface FilterCollectionState {
 
 export interface DetailState {
   detail: Movie | Show | Person;
-  isLoading: boolean
+  isLoading: boolean;
+}
+
+export interface FavoritesState {
+  favorites: (Movie | Show)[];
 }
