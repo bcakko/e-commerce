@@ -13,6 +13,7 @@ export interface Person {
   name: string;
   popularity: number;
   profile_path: string;
+  biography: string;
 }
 export interface KnownForEntity {
   adult?: boolean | null;

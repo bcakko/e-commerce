@@ -1,5 +1,5 @@
 const CollectionImage = (props: {
-  url: string;
+  url: string | null;
   className?: string;
   onClick?: () => void;
 }) => {

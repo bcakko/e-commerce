@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { RootState } from "../types/RootState.types";
 import { GET_DETAIL_FETCH } from "../redux/actions/detailActions";
 import NotFoundPage from "./NotFoundPage";
+import CollectionImage from "../components/UI/CollectionImage";
+import CollectionCard from "../components/UI/CollectionCard";
 
 const DetailsPage = () => {
   const { mainCategory, id } = useParams();
@@ -37,189 +39,75 @@ const DetailsPage = () => {
     return <NotFoundPage />;
   }
 
-  if ("title" in detail) {
-    // Movie Detail
-    return (
-      <div className="flex items-center justify-center mt-7 xs:w-full">
-        {detail.backdrop_path ? (
-          <img
-            src={`https://image.tmdb.org/t/p/w500${detail.backdrop_path}`}
-            className="w-full xs:h-[400px] lg:h-[500px] object-cover brightness-50"
-          />
-        ) : (
-          <img
-            src={`https://images.unsplash.com/photo-1614849286521-4c58b2f0ff15?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80`}
-            className="w-full xs:h-[400px] lg:h-[500px] object-cover brightness-50"
-          />
-        )}
-        <div className="xs:w-3/5 sm:w-3/5 xl:w-[729px] xl:h-[364px] absolute">
-          {detail ? (
-            <div className="w-full h-full flex bg-header-main-color shadow-2xl">
-              <div className="xs:w-full xs:h-5/12 sm:w-1/3 sm:h-full">
-                {detail.poster_path ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${detail.poster_path}`}
-                    className="w-full h-full object-contain"
-                  />
-                ) : (
-                  <img
-                    src={`http://cdn.onlinewebfonts.com/svg/img_546302.png`}
-                    className="w-full h-full object-contain"
-                  />
-                )}
-              </div>
-              <div className="xs:w-full xs:h-7/12 sm:w-2/3 sm:h-full flex">
-                <div className="flex flex-col h-full md:ml-5 xs:p-3 sm:p-0">
-                  <span className="xs:text-xs md:text-xl lg:text-3xl sm:mb-2">
-                    {detail.title}
-                  </span>
-                  <div className="xs:text-xs md:text-sm">
-                    <span>Original title: </span>
-                    <span>{detail.original_title}</span>
-                  </div>
+  const detailInfoMap = {
+    title: "title" in detail ? detail.title : detail.name,
+    original_title:
+      "title" in detail
+        ? detail.original_title
+        : "first_air_date" in detail
+        ? detail.original_name
+        : "",
+    release_date:
+      "title" in detail
+        ? detail.release_date
+        : "first_air_date" in detail
+        ? detail.first_air_date
+        : "",
+    overview:
+      "title" in detail
+        ? detail.overview
+        : "first_air_date" in detail
+        ? detail.overview
+        : detail.biography,
+    poster_path:
+      "title" in detail
+        ? detail.poster_path
+        : "first_air_date" in detail
+        ? detail.poster_path
+        : detail.profile_path,
+    backdrop_path:
+      "title" in detail
+        ? detail.backdrop_path
+        : "first_air_date" in detail
+        ? detail.backdrop_path
+        : null,
+    production:
+      "title" in detail || "first_air_date" in detail ? detail : undefined,
+  };
 
-                  {detail.release_date ? (
-                    <div className="xs:text-xs md:text-sm">
-                      <span>Release Date: </span>
-                      <span>{detail.release_date}</span>
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                  <div className="xs:text-xs md:text-sm xs:mb-2 sm:mb-0 md:mb-2 lg:mb-2">
-                    <span>User Vote: </span>
-                    <span>{detail.vote_average}</span>
-                  </div>
-                  <div className="xs:hidden sm:block sm:text-xs lg:text-lg">
-                    {detail.overview}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            "Loading"
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  // Person
-  if ("name" in detail && "profile_path" in detail) {
-    return (
-      <div className="flex items-center justify-center mt-7 xs:w-full">
-        <img
-          src={`https://images.unsplash.com/photo-1614849286521-4c58b2f0ff15?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80`}
-          className="w-full h-full object-cover brightness-50"
+  return (
+    <div>
+      <div className="flex flex-col justify-end h-[200px] sm:h-[400px] relative text-header-main-color">
+        <CollectionImage
+          url={detailInfoMap.backdrop_path}
+          className="absolute top-0 w-full h-full object-cover -z-20 brightness-[60%] blur-[1px]"
         />
-        <div className="xs:w-3/5 sm:w-3/5 xl:w-[729px] xl:h-[364px] absolute">
-          {detail ? (
-            <div className="w-full h-full flex bg-header-main-color shadow-2xl">
-              <div className="xs:w-full xs:h-5/12 sm:w-1/3 sm:h-full">
-                {detail.profile_path ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${detail.profile_path}`}
-                    className="w-full h-full object-contain"
-                  />
-                ) : (
-                  <img
-                    src={`http://cdn.onlinewebfonts.com/svg/img_546302.png`}
-                    className="w-full h-full object-contain"
-                  />
-                )}
-              </div>
-              <div className="xs:w-full xs:h-7/12 sm:w-2/3 sm:h-full flex">
-                <div className="flex flex-col h-full md:ml-5 xs:p-3 sm:p-0">
-                  <span className="xs:text-xs md:text-xl lg:text-3xl sm:mb-2">
-                    {detail.name}
-                  </span>
-                  <div className="xs:text-xs md:text-sm">
-                    <span>Department: </span>
-                    <span>{detail.known_for_department}</span>
-                  </div>
-                  <div className="xs:text-xs md:text-sm xs:mb-2 sm:mb-0 md:mb-2 lg:mb-2">
-                    <span>Popularity: </span>
-                    <span>{detail.popularity}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            "Loading"
-          )}
-        </div>
+        <p className="text-4xl px-5">{detailInfoMap.title} </p>
+        <span className="text-sm px-5 py-5">
+          {detailInfoMap.title !== detailInfoMap.original_title &&
+            detailInfoMap.original_title}
+        </span>
       </div>
-    );
-  }
-
-  // Show
-  if ("name" in detail && "poster_path" in detail) {
-    return (
-      <div className="flex items-center justify-center mt-7 xs:w-full">
-        {detail.backdrop_path ? (
-          <img
-            src={`https://image.tmdb.org/t/p/w500${detail.backdrop_path}`}
-            className="w-full xs:h-[400px] lg:h-[500px] object-cover brightness-50"
+      <div className="flex flex-col sm:flex-row justify-between items-center w-full ">
+        <div className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4 lg:w-2/6 order-2 sm:order-1">
+          <CollectionCard
+            id={detail.id}
+            title={detailInfoMap.title}
+            imageUrl={detailInfoMap.poster_path}
+            rating={
+              !("known_for_department" in detail)
+                ? detail.vote_average
+                : undefined
+            }
+            production={detailInfoMap.production}
           />
-        ) : (
-          <img
-            src={`https://images.unsplash.com/photo-1614849286521-4c58b2f0ff15?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80`}
-            className="w-full xs:h-[400px] lg:h-[500px] object-cover brightness-50"
-          />
-        )}
-        <div className="xs:w-3/5 sm:w-3/5 xl:w-[729px] xl:h-[364px] absolute">
-          {detail ? (
-            <div className="w-full h-full flex bg-header-main-color shadow-2xl">
-              <div className="xs:w-full xs:h-5/12 sm:w-1/3 sm:h-full">
-                {detail.poster_path ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${detail.poster_path}`}
-                    className="w-full h-full object-contain"
-                  />
-                ) : (
-                  <img
-                    src={`http://cdn.onlinewebfonts.com/svg/img_546302.png`}
-                    className="w-full h-full object-contain"
-                  />
-                )}
-              </div>
-              <div className="xs:w-full xs:h-7/12 sm:w-2/3 sm:h-full flex">
-                <div className="flex flex-col h-full md:ml-5 xs:p-3 sm:p-0">
-                  <span className="xs:text-xs md:text-xl lg:text-3xl sm:mb-2">
-                    {detail.name}
-                  </span>
-                  <div className="xs:text-xs md:text-sm">
-                    <span>Original title: </span>
-                    <span>{detail.original_name}</span>
-                  </div>
-
-                  {detail.first_air_date ? (
-                    <div className="xs:text-xs md:text-sm">
-                      <span>First Air Date: </span>
-                      <span>{detail.first_air_date}</span>
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                  <div className="xs:text-xs md:text-sm xs:mb-2 sm:mb-0 md:mb-2 lg:mb-2">
-                    <span>User Vote: </span>
-                    <span>{detail.vote_average}</span>
-                  </div>
-                  <div className="xs:hidden sm:block sm:text-xs lg:text-lg">
-                    {detail.overview}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            "Loading"
-          )}
         </div>
+        <p className="w-full sm:w-2/3 md:w-3/4 lg:w-4/6 p-2 indent-10 order-1 sm:order-2">
+          {detailInfoMap.overview}
+        </p>
       </div>
-    );
-  }
-
-  return <div></div>;
+    </div>
+  );
 };
 
 export default DetailsPage;

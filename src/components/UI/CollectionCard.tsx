@@ -11,14 +11,15 @@ import {
   addToFavoritesAction,
   removeFromFavoritesAction,
 } from "../../redux/actions/favoritesActions";
+import { Person } from "../../types/People.types";
 
 const CollectionCard = (props: {
   id: number;
   title: string;
   imageUrl: string;
-  rating: number;
-  type: "movie" | "tv";
-  production: Movie | Show;
+  rating?: number;
+  type?: "movie" | "tv";
+  production?: Movie | Show;
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,10 +33,12 @@ const CollectionCard = (props: {
   };
 
   const onFavoriteHandler = () => {
-    if (isFavorite) {
-      dispatch(removeFromFavoritesAction(props.production));
-    } else {
-      dispatch(addToFavoritesAction(props.production));
+    if (props.production) {
+      if (isFavorite) {
+        dispatch(removeFromFavoritesAction(props.production));
+      } else {
+        dispatch(addToFavoritesAction(props.production));
+      }
     }
   };
 
@@ -45,7 +48,7 @@ const CollectionCard = (props: {
         <CollectionImage
           className="cursor-pointer object-contain w-full rounded-t-lg"
           url={props.imageUrl}
-          onClick={navigateToDetailsHandler}
+          onClick={props.production ? navigateToDetailsHandler : () => {}}
         />
         <div className="px-3 bg-main-color text-header-main-color rounded-b-lg pt-5">
           <p className="truncate font-semibold">{props.title}</p>
@@ -65,7 +68,9 @@ const CollectionCard = (props: {
                 )
               }
             />
-            <p className="font-bold">{props.rating.toFixed(1)}</p>
+            <p className="font-bold">
+              {props.rating ? props.rating.toFixed(1) : ""}
+            </p>
           </div>
         </div>
       </div>
