@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 // Redux
 import { useDispatch } from 'react-redux';
 import { logUserInAction } from '../redux/actions/userActions';
+import { showNotifier } from '../redux/actions/notifierActions';
 export default function AuthPage() {
 
     let [auth, setAuth] = useState({
@@ -95,10 +96,13 @@ export default function AuthPage() {
 
                 localStorage.setItem("user", JSON.stringify(localData))
                 if(response)dispatch(logUserInAction(response.data.user._id))
+                dispatch(showNotifier("Auth is successful"))
             })
             .catch((error:IAuthLoginErrorType) => {
                 console.log(error)
                 messageHandler(error.response.data.message);
+                dispatch(showNotifier(error.response.data.message))
+                
             })
     }
 
@@ -112,7 +116,6 @@ export default function AuthPage() {
                 
             }else{
                 messageHandler("inputs are weak")
-                console.log("inputs are weak")
             }
         }else if(auth.register){
             if(userInputs.username.length && userInputs.password.length && userInputs.confirmPassword.length >= 4){

@@ -33,3 +33,8 @@ export interface UserState {
     username: string
   }
 }
+
+export interface NotifierState {
+  isShown: boolean,
+  message: string
+}

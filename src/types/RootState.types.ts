@@ -3,7 +3,8 @@ import {
   FilterCollectionState,
   DetailState,
   FavoritesState,
-  UserState
+  UserState,
+  NotifierState
 } from "./States.types";
 
 export interface RootState {
@@ -11,5 +12,6 @@ export interface RootState {
   filterCollection: FilterCollectionState;
   detail: DetailState;
   favorites: FavoritesState;
-  user: UserState
+  user: UserState;
+  notifier: NotifierState
 }
