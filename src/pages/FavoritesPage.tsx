@@ -10,22 +10,28 @@ const FavoritesPage = () => {
     (state: RootState) => state.favorites.favorites
   );
   return (
-    <div className="flex flex-wrap pb-5">
-      {favorites.map((item: Movie | Show) => (
-        <div
-          key={item.id}
-          className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6"
-        >
-          <CollectionCard
-            id={item.id}
-            title={"title" in item ? item.title : item.name}
-            imageUrl={item.poster_path}
-            rating={item.vote_average}
-            type={"title" in item ? "movie" : "tv"}
-            production={item}
-          />
-        </div>
-      ))}
+    <div className="flex flex-wrap">
+      {favorites.length ? (
+        favorites.map((item: Movie | Show) => (
+          <div
+            key={item.id}
+            className="w-full xs:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6"
+          >
+            <CollectionCard
+              id={item.id}
+              title={"title" in item ? item.title : item.name}
+              imageUrl={item.poster_path}
+              rating={item.vote_average}
+              type={"title" in item ? "movie" : "tv"}
+              production={item}
+            />
+          </div>
+        ))
+      ) : (
+        <p className="p-5 text-xl font-semibold">
+          Your favorites list is empty.
+        </p>
+      )}
     </div>
   );
 };

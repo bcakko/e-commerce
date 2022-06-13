@@ -10,6 +10,8 @@ import { Movie } from "../types/Movies.types";
 import { Show } from "../types/Shows.types";
 import { RootState } from "../types/RootState.types";
 import NotFoundPage from "./NotFoundPage";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+import Modal from "../components/UI/Modal";
 
 const CollectionPage = () => {
   const { mainCategory, subCategory, page } = useParams();
@@ -59,7 +61,11 @@ const CollectionPage = () => {
       collection[collectionMap[mainCategory ? mainCategory : ""]].results;
   }
   if (isLoading) {
-    return <p className="mt-10">Loading...</p>;
+    return (
+      <Modal onClose={() => {}}>
+        <LoadingSpinner />
+      </Modal>
+    );
   }
 
   const paginationHandler = (event: any) => {

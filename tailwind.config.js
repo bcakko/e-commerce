@@ -6,7 +6,8 @@ module.exports = {
       "side-color": "#40b89f",
       "secondary-color": "#c25067",
       "header-main-color": "#f3f3f3",
-      "header-secondary-color": "#D6B02E"
+      "header-secondary-color": "#D6B02E",
+      "backdrop-color": "#121212",
     },
     screens: {
       xs: "280px",
@@ -26,4 +27,3 @@ module.exports = {
   },
   plugins: [],
 };
-

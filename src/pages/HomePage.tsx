@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Carousel from "../components/UI/Carousel";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+import Modal from "../components/UI/Modal";
 import TopPick from "../components/UI/TopPick";
 import { collectionFetchAction } from "../redux/actions/collectionActions";
 import { filterCollectionFetchAction } from "../redux/actions/filterCollectionActions";
@@ -16,8 +18,11 @@ const HomePage = () => {
   const shows = useSelector(
     (state: RootState) => state.collection.collection.shows
   );
-  const isLoading = useSelector(
+  const collectionIsLoading = useSelector(
     (state: RootState) => state.collection.isLoading
+  );
+  const filterIsLoading = useSelector(
+    (state: RootState) => state.filterCollection.isLoading
   );
 
   useEffect(() => {
@@ -26,8 +31,12 @@ const HomePage = () => {
     dispatch(filterCollectionFetchAction("brad"));
   }, [dispatch]);
 
-  if (isLoading) {
-    return <p className="pt-16">Loading...</p>;
+  if (collectionIsLoading || filterIsLoading) {
+    return (
+      <Modal onClose={() => {}}>
+        <LoadingSpinner />
+      </Modal>
+    );
   }
 
   // Top picks selector

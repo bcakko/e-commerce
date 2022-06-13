@@ -11,7 +11,6 @@ import {
   addToFavoritesAction,
   removeFromFavoritesAction,
 } from "../../redux/actions/favoritesActions";
-import { Person } from "../../types/People.types";
 
 const CollectionCard = (props: {
   id: number;
@@ -53,22 +52,26 @@ const CollectionCard = (props: {
         <div className="px-3 bg-main-color text-header-main-color rounded-b-lg pt-5">
           <p className="truncate font-semibold">{props.title}</p>
           <div className="flex justify-between items-center">
-            <FavoriteIcon
-              icon={
-                isFavorite ? (
-                  <MdOutlineFavorite
-                    className={`w-7 h-7`}
-                    onClick={onFavoriteHandler}
-                  />
-                ) : (
-                  <MdOutlineFavoriteBorder
-                    className={`w-7 h-7`}
-                    onClick={onFavoriteHandler}
-                  />
-                )
-              }
-            />
-            <p className="font-bold">
+            {props.production ? (
+              <FavoriteIcon
+                icon={
+                  isFavorite ? (
+                    <MdOutlineFavorite
+                      className={`w-7 h-7`}
+                      onClick={onFavoriteHandler}
+                    />
+                  ) : (
+                    <MdOutlineFavoriteBorder
+                      className={`w-7 h-7`}
+                      onClick={onFavoriteHandler}
+                    />
+                  )
+                }
+              />
+            ) : (
+              ""
+            )}
+            <p className="font-bold pb-2">
               {props.rating ? props.rating.toFixed(1) : ""}
             </p>
           </div>

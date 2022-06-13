@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 const InnerLinks = () => {
   return (
     <nav>
-      <ul className="flex flex-col items-center sm:items-start">
+      <ul className="text-center">
         <li>
           <NavLink className="inline-block w-full" to="/hesabim">
             Hesabım
