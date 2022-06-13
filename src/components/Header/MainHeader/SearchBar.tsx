@@ -34,6 +34,13 @@ const SearchBar = (props: ISearchBarProps) => {
 
   const searchBoxRef = useRef<HTMLDivElement>(null);
 
+  // Routing
+  const navigate = useNavigate();
+  const routeChange = (id: string, url: string) => {
+    let path: string = `/detail/${url}/${id}`;
+      navigate(path);
+  };
+
   //? event: any sorulacak!
   function useOutsideClicker(ref: RefObject<HTMLDivElement>): void {
     useEffect(() => {
@@ -57,31 +64,24 @@ const SearchBar = (props: ISearchBarProps) => {
 
   useOutsideClicker(searchBoxRef);
 
-  // Routing
-  const navigate = useNavigate();
-  const routeChange = (id: string, url: string) => {
-    let path: string = `/detail/${url}/${id}`;
-    navigate(path);
-  };
-
   const onSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const searchBoxString = event.target.value.toLocaleLowerCase();
     setSearchBox(searchBoxString);
 
     if (searchBoxRef && searchBoxRef.current && collection.length < 4)
-      searchBoxRef.current.className = `flex xs:w-40 sm:w-80 h-32 overflow-auto absolute z-20`;
+      searchBoxRef.current.className = `flex xs:w-40 sm:w-80 h-32 overflow-auto absolute z-20 ${mainBgColor} ${mainBorderColor}`;
     if (searchBoxRef && searchBoxRef.current && collection.length > 4)
-      searchBoxRef.current.className = `flex xs:w-40 sm:w-80 h-96 overflow-auto absolute z-20`;
+      searchBoxRef.current.className = `flex xs:w-40 sm:w-80 h-96 overflow-auto absolute z-20 ${mainBgColor} ${mainBorderColor}`;
+    if(searchBox) dispatch(filterCollectionFetchAction(searchBox));
   };
 
-  useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      console.log(searchBox);
-      dispatch(filterCollectionFetchAction(searchBox));
-    }, 300);
+  // useEffect(() => {
+  //   const delayDebounceFn = setTimeout(() => {
+  //     dispatch(filterCollectionFetchAction(searchBox));
+  //   }, 300);
 
-    return () => clearTimeout(delayDebounceFn);
-  }, [searchBox]);
+  //   return () => clearTimeout(delayDebounceFn);
+  // }, [searchBox]);
 
   const onClickHandler = (event: MouseEvent<HTMLLIElement>): void => {
     const { currentTarget } = event;
@@ -101,7 +101,7 @@ const SearchBar = (props: ISearchBarProps) => {
           onChange={onSearchChange}
           type="search"
           placeholder="what are you looking for?"
-          className={`${inputPlaceholderColor} ${inputTextColor} ${inputBgColor} w-full p-1 focus:outline-none`}
+          className={`${inputPlaceholderColor} ${inputTextColor} ${inputBgColor} ${mainBorderColor} w-full p-1 focus:outline-none`}
         />
         <FiSearch className="xs:text-3xl md:text-xl" />
       </div>

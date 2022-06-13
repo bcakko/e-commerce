@@ -48,7 +48,7 @@ const NavBar = () => {
   return (
     <nav className="w-full flex justify-center bg-secondary-color text-header-main-color p-1">
       {navLinks ?
-        <div className="xs:w-full xs:flex lg:w-11/12 font-sans font-semibold text-sm ">
+        <div className="xs:w-full xs:flex lg:w-11/12 font-sans font-semibold text-sm">
           <DropdownMenu
               ddTitle="Movies"
               ddTitleStyle="mr-5 cursor-pointer transition-all"

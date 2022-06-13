@@ -42,15 +42,6 @@ router.get("/getOne/:id", async (req, res) => {
     }
 })
 
-router.post("/register", async (req, res, next) => {
-    await UserModel.create({
-        username: req.body.username,
-        password: req.body.password,
-    });
-    const user = await UserModel.find();
-    res.json(user).status(200);
-});
-
 router.post("/login", async (req, res, next) => {
     const user = await UserModel.findOne({
         username: req.body.username,

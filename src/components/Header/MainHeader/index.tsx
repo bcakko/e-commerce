@@ -12,7 +12,7 @@ const MainHeader = () => {
             </div>
           </Link>
           <SearchBar 
-          mainWidth="xs:w-40 sm:w-80" mainBorderColor="border-main-color" mainTextColor="text-main-color" mainBgColor="bg-header-main-color" inputTextColor="text-main-color" inputBgColor="bg-header-main-color" inputPlaceholderColor="placeholder:text-main-color"/>
+          mainWidth="xs:w-40 sm:w-80" mainTextColor="text-main-color" mainBgColor="bg-header-main-color" inputTextColor="text-main-color" inputPlaceholderColor="placeholder:text-main-color"/>
           <UserNav iconColor="text-main-color"/>
         </div>
       </header>

@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="w-full">
       <MainHeader />
-      <NavBar />
+      <NavBar/>
     </div>
   );
 };
