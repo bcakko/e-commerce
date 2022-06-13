@@ -10,6 +10,7 @@ import AuthPage from "./pages/AuthPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { useSelector } from "react-redux"
 import { RootState } from "./types/RootState.types"
+import Notifier from "./components/Notifier/Notifier";
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
+      <Notifier />
     </div>
   );
 }

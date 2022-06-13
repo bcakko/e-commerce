@@ -87,3 +87,17 @@ export interface LogUserInSuccessAction {
 export interface LogUserOutAction {
   type: "LOG_USER_OUT";
 }
+
+export interface ShowNotifierAction {
+  type: "SHOW_NOTIFIER";
+  payload: {
+    message: string
+  }
+}
+
+export interface HideNotifierAction {
+  type: "HIDE_NOTIFIER";
+  payload: {
+    message: ""
+  }
+}

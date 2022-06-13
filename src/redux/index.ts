@@ -6,6 +6,7 @@ import detailReducer from "./reducers/detailReducer";
 import favoritesReducer from "./reducers/favoritesReducer";
 import filterCollectionReducer from "./reducers/filterCollectionReducer";
 import userReducer from "./reducers/userReducer";
+import notifierReducer from "./reducers/notifierReducer";
 import sagas from "./sagas";
 
 const sagaMiddleware = createSagaMiddleware();
@@ -15,7 +16,8 @@ const store = configureStore({
     filterCollection: filterCollectionReducer,
     detail: detailReducer,
     favorites: favoritesReducer,
-    user: userReducer
+    user: userReducer,
+    notifier: notifierReducer
   },
   middleware: [sagaMiddleware],
 });
