@@ -70,15 +70,9 @@ const CollectionPage = () => {
 
   const paginationHandler = (event: any) => {
     //! Ugur ve Can'a sor!
-    console.log(event);
-    if (!event.target.textContent) {
-      navigate(
-        `/collection/${mainCategory}/${subCategory}/${page ? +page + 1 : 1}`
-      );
-    } else
-      navigate(
-        `/collection/${mainCategory}/${subCategory}/${event.target.textContent}`
-      );
+    navigate(
+      `/collection/${mainCategory}/${subCategory}/${event.target.textContent}`
+    );
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome & Firefox
   };

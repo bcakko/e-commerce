@@ -6,22 +6,22 @@ const InnerLinks = () => {
       <ul className="text-center">
         <li>
           <NavLink className="inline-block w-full" to="/hesabim">
-            Hesabım
+            Account
           </NavLink>
         </li>
         <li>
           <NavLink className="inline-block w-full" to="/satis-sozlesmesi">
-            Mesafeli Satış Sözleşmesi
+            Sales Agreement
           </NavLink>
         </li>
         <li>
           <NavLink className="inline-block w-full" to="/gizlilik-guvenlik">
-            Gizlilik ve Güvenlik
+            Privacy and Security
           </NavLink>
         </li>
         <li>
           <NavLink className="inline-block w-full" to="iptal-iade">
-            İptal ve İade
+            Cancellation and Refund Policy
           </NavLink>
         </li>
       </ul>
