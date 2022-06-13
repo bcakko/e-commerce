@@ -34,6 +34,13 @@ const SearchBar = (props: ISearchBarProps) => {
 
   const searchBoxRef = useRef<HTMLDivElement>(null);
 
+  // Routing
+  const navigate = useNavigate();
+  const routeChange = (id: string, url: string) => {
+    let path: string = `/detail/${url}/${id}`;
+      navigate(path);
+  };
+
   //? event: any sorulacak!
   function useOutsideClicker(ref: RefObject<HTMLDivElement>): void {
     useEffect(() => {
@@ -56,13 +63,6 @@ const SearchBar = (props: ISearchBarProps) => {
   }
 
   useOutsideClicker(searchBoxRef);
-
-  // Routing
-  const navigate = useNavigate();
-  const routeChange = (id: string, url: string) => {
-    let path: string = `/detail/${url}/${id}`;
-    navigate(path);
-  };
 
   const onSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const searchBoxString = event.target.value.toLocaleLowerCase();

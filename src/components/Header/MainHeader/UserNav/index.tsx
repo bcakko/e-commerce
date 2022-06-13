@@ -6,7 +6,7 @@ import DropdownMenu from "../../../UI/DropdownMenu";
 import { FaHeart, FaUser } from "react-icons/fa"
 // Types
 import { RootState } from "../../../../types/RootState.types";
-import { IUserNavProps, IMiniDropDownProps } from "../../../../types/Header.types";
+import { IUserNavProps } from "../../../../types/Header.types";
 import { Movie } from "../../../../types/Movies.types";
 import { Show } from "../../../../types/Shows.types";
 // Redux
@@ -35,7 +35,7 @@ const UserNav = (props: IUserNavProps) => {
   const miniFavRef = useRef<HTMLDivElement>(null);
   const miniFavListRef = useRef<HTMLDivElement>(null);
   const showDropdown = () : void => {
-  if(miniFavListRef && miniFavListRef.current !== null) {
+  if(miniFavListRef && miniFavListRef.current !== null  && favs.length >= 1) {
     miniFavListRef.current.className = `block`;
   }
   };
@@ -89,8 +89,8 @@ const UserNav = (props: IUserNavProps) => {
     if(localStorage.hasOwnProperty("favorites")) {favData = localStorage.getItem("favorites")}
     let newFavData;
     if(favData!==undefined && favData!==null) newFavData = JSON.parse(favData);
-    if(favs!==undefined && favs!==null) setFavorites(favs)
-  },[])
+    if(favs!==undefined && favs!==null) setFavorites(newFavData)
+  },[favs])
 
       return (
       <div className={`w-24 flex justify-around ${iconColor} items-center`}>
@@ -112,7 +112,7 @@ const UserNav = (props: IUserNavProps) => {
           <LinkWithIcon type="inner" path="/favorites" icon={<FaHeart />} className="text-xl p-1 hover:text-side-color
           transition-all"/>
           <div ref={miniFavListRef} className="hidden">
-            <MiniFav data_fav={favorites} />
+            <MiniFav data_fav={favorites} data_style="border rounded overflow-hidden"/>
           </div>
         </div>
       </div>

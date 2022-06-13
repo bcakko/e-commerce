@@ -38,5 +38,6 @@ export interface IDropdownCategory {
 }
 
 export interface IMiniDropDownProps {
-    data_fav?: (Movie | Show)[];
+    data_fav?: (Movie | Show)[],
+    data_style?: string
 }
