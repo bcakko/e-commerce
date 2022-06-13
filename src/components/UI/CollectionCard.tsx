@@ -11,6 +11,7 @@ import {
   addToFavoritesAction,
   removeFromFavoritesAction,
 } from "../../redux/actions/favoritesActions";
+import { showNotifier } from "../../redux/actions/notifierActions";
 
 const CollectionCard = (props: {
   id: number;
@@ -35,8 +36,10 @@ const CollectionCard = (props: {
     if (props.production) {
       if (isFavorite) {
         dispatch(removeFromFavoritesAction(props.production));
+        dispatch(showNotifier("removed from favorites!"))
       } else {
         dispatch(addToFavoritesAction(props.production));
+        dispatch(showNotifier("added to favorites!"))
       }
     }
   };

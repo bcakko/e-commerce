@@ -105,7 +105,7 @@ const UserNav = (props: IUserNavProps) => {
         ddStyle="mr-5 z-20 w-[150px] -ml-[128px]"
         />
         :
-        <Link to="/auth" className="hover:text-side-color transition-all ease-in">Signin</Link>}
+        <Link to="/auth" className="hover:text-side-color transition-all ease-in">Sign-in</Link>}
 
         <div ref={miniFavRef} onMouseEnter={()=> showDropdown()} onMouseLeave={()=> hideDropdown()} className="xs:flex
           items-center">

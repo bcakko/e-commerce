@@ -31,7 +31,7 @@ const MiniFav = (props: IMiniDropDownProps) => {
   };
 
 return (
-<div className={`xs:w-80 ${data_style} ${data_fav!==undefined && data_fav.length >= 3 ? "xs:h-52 mt-3" : "xs:h-40 mt-3"} -ml-[20rem] absolute z-40`}>
+<div className={`xs:w-80 ${data_style} ${data_fav!==undefined && data_fav.length >= 3 ? "xs:h-52 mt-3" : "xs:h-40 mt-3"} -ml-[20rem] absolute z-40 shadow-2xl shadow-side-color-500/50`}>
   <ul className="xs:w-full xs:h-full overflow-auto bg-header-main-color">
     { data_fav !== undefined ? data_fav.map((item: Movie | Show, index:number) => {
     if("title" in item){

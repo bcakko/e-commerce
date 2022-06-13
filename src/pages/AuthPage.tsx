@@ -138,7 +138,7 @@ export default function AuthPage() {
 
 return (
 <div
-    className="xs:w-full xs:h-[65vh] xs:mt-7 xs:flex xs:justify-center xs:items-center bg-gradient-to-b from-main-color to-side-color text-header-main-color">
+    className="xs:w-full xs:h-[65vh] xs:flex xs:justify-center xs:items-center bg-gradient-to-b from-main-color to-side-color text-header-main-color">
     <div className={`${auth.login ? "xs:h-2/4" : "xs:h-[55%]"} xs:w-[70%] sm:w-2/5 lg:w-1/4 xl:w-[25%] absolute xs:flex xs:flex-col items-center justify-around shadow-lg p-5 transition-all ease-in`}>
         <div className="xs:w-full xs:flex xs:flex-col">
             <span className="xs:opacity-75">User name : </span>
@@ -160,7 +160,7 @@ return (
             <button onClick={onSubmit} className="xs:w-full p-1 rounded-md bg-main-color hover:bg-secondary-color 0transition-all ease-in">{auth.register ? "REGISTER" : "LOGIN"}</button>
             <div className="xs:w-full xs:flex xs:flex-col xs:items-center xs:mt-2">
                 <span className="xs:text-xs sm:text-sm xs:opacity-50">{auth.register ? "Do you have an account?" : "Don't you have an account?"}</span>
-                <span onClick={changeAuth} className="xs:text-sm xs:opacity-75 cursor-pointer">{auth.register ? "LOGIN" : "REGISTER"}</span>
+                <span onClick={changeAuth} className="xs:text-sm xs:opacity-75 cursor-pointer hover:opacity-100">{auth.register ? "LOGIN" : "REGISTER"}</span>
             </div>
         </div>
     </div>

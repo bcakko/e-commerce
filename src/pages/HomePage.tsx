@@ -21,9 +21,6 @@ const HomePage = () => {
   const collectionIsLoading = useSelector(
     (state: RootState) => state.collection.isLoading
   );
-  const filterIsLoading = useSelector(
-    (state: RootState) => state.filterCollection.isLoading
-  );
 
   useEffect(() => {
     dispatch(collectionFetchAction("movie", "popular", 1));
@@ -31,7 +28,7 @@ const HomePage = () => {
     dispatch(filterCollectionFetchAction("brad"));
   }, [dispatch]);
 
-  if (collectionIsLoading || filterIsLoading) {
+  if (collectionIsLoading) {
     return (
       <Modal onClose={() => {}}>
         <LoadingSpinner />

@@ -75,14 +75,6 @@ const SearchBar = (props: ISearchBarProps) => {
     if(searchBox) dispatch(filterCollectionFetchAction(searchBox));
   };
 
-  // useEffect(() => {
-  //   const delayDebounceFn = setTimeout(() => {
-  //     dispatch(filterCollectionFetchAction(searchBox));
-  //   }, 300);
-
-  //   return () => clearTimeout(delayDebounceFn);
-  // }, [searchBox]);
-
   const onClickHandler = (event: MouseEvent<HTMLLIElement>): void => {
     const { currentTarget } = event;
     const clickedId = (currentTarget as Element).getAttribute("data-id");
@@ -107,7 +99,7 @@ const SearchBar = (props: ISearchBarProps) => {
       </div>
       <div ref={searchBoxRef} className={`hidden`}>
         <ul className="w-full">
-          {collection
+          {collection != undefined && collection.length>=1
             ? collection.map((item, index) => {
                 if ("name" in item && "poster_path" in item) {
                   return (
@@ -116,7 +108,7 @@ const SearchBar = (props: ISearchBarProps) => {
                       key={index}
                       data-id={item.id}
                       data-path="tv"
-                      className="flex p-2 w-full items-center hover:bg-side-color cursor-pointer"
+                      className="flex p-2 w-full items-center hover:bg-side-color hover:text-header-main-color cursor-pointer"
                     >
                       <img
                         src={
@@ -137,7 +129,7 @@ const SearchBar = (props: ISearchBarProps) => {
                       key={index}
                       data-id={item.id}
                       data-path="movie"
-                      className="flex p-2 w-full items-center hover:bg-side-color cursor-pointer"
+                      className="flex p-2 w-full items-center hover:bg-side-color hover:text-header-main-color cursor-pointer"
                     >
                       <img
                         src={
@@ -158,7 +150,7 @@ const SearchBar = (props: ISearchBarProps) => {
                       key={index}
                       data-id={item.id}
                       data-path="person"
-                      className="flex p-2 w-full items-center hover:bg-side-color cursor-pointer"
+                      className="flex p-2 w-full items-center hover:bg-side-color hover:text-header-main-color cursor-pointer"
                     >
                       <img
                         src={
@@ -173,7 +165,7 @@ const SearchBar = (props: ISearchBarProps) => {
                   );
                 }
               })
-            : "No result"}
+            : <span className="text-side-color">No result</span>}
         </ul>
       </div>
     </div>
