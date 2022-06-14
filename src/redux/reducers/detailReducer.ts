@@ -26,6 +26,7 @@ const initialState: DetailState = {
         video: false,
         vote_average: 0,
         vote_count: 0,
+        genres: [],
     },
     isLoading: false
 }
