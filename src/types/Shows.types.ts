@@ -22,4 +22,10 @@ export interface Show {
     id: number;
     name: string;
   }[];
+
+  title?: string | null;
+  original_title?: string | null;
+  known_for_department?: string | null;
+  release_date?: string | null;
+  profile_path?: string | null;
 }

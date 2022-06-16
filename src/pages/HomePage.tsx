@@ -12,20 +12,24 @@ import { Show } from "../types/Shows.types";
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const movies = useSelector(
-    (state: RootState) => state.collection.collection.movies
-  );
-  const shows = useSelector(
-    (state: RootState) => state.collection.collection.shows
-  );
-  const collectionIsLoading = useSelector(
-    (state: RootState) => state.collection.isLoading
-  );
+  // const movies = useSelector(
+  //   (state: RootState) => state.collection.collection.movies
+  // );
+  // const shows = useSelector(
+  //   (state: RootState) => state.collection.collection.shows
+  // );
+  // const collectionIsLoading = useSelector(
+  //   (state: RootState) => state.collection.isLoading
+  // );
+
+  const {
+    collection: { movies, shows },
+    isLoading: collectionIsLoading,
+  } = useSelector((state: RootState) => state.collection);
 
   useEffect(() => {
     dispatch(collectionFetchAction("movie", "popular", 1));
     dispatch(collectionFetchAction("tv", "popular", 1));
-    dispatch(filterCollectionFetchAction("brad"));
   }, [dispatch]);
 
   if (collectionIsLoading) {
@@ -43,7 +47,7 @@ const HomePage = () => {
   }
 
   return (
-    <div>
+    <>
       <TopPick production={topPick} />
       <div className="w-full lg:w-11/12 xl:w-4/5 mx-auto mt-16">
         <h1 className="text-3xl font-semibold">The Most Popular Movies</h1>
@@ -51,7 +55,7 @@ const HomePage = () => {
         <h1 className="text-3xl font-semibold">The Most Popular TV Shows</h1>
         <Carousel type="list" slides={shows.results} />
       </div>
-    </div>
+    </>
   );
 };
 

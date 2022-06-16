@@ -2,17 +2,27 @@ import { FiSearch } from "@react-icons/all-files/fi/FiSearch";
 import { ISearchBarProps } from "../../../types/Header.types";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../types/RootState.types";
-import {
-  useEffect,
-  useRef,
-  useState,
-  ChangeEvent,
-  MouseEvent,
-  RefObject,
-} from "react";
+
+import { useEffect, useRef, useState } from "react";
+
+import type { ChangeEvent, MouseEvent, RefObject } from "react";
+
 import { useNavigate } from "react-router-dom";
 import { filterCollectionFetchAction } from "../../../redux/actions/filterCollectionActions";
 import { detailFetchAction } from "../../../redux/actions/detailActions";
+
+// type MovieItem = {
+//   id: number;
+//   title: string;
+//   name?: null;
+// }
+// type ShowItem = {
+//   id: number;
+//   name: string;
+//   title?: null;
+// }
+
+// // type Item = MovieItem | ShowItem;
 
 const SearchBar = (props: ISearchBarProps) => {
   const {
@@ -38,7 +48,7 @@ const SearchBar = (props: ISearchBarProps) => {
   const navigate = useNavigate();
   const routeChange = (id: string, url: string) => {
     let path: string = `/detail/${url}/${id}`;
-      navigate(path);
+    navigate(path);
   };
 
   //? event: any sorulacak!
@@ -68,14 +78,14 @@ const SearchBar = (props: ISearchBarProps) => {
     const searchBoxString = event.target.value.toLocaleLowerCase();
     setSearchBox(searchBoxString);
 
-    if (searchBoxRef && searchBoxRef.current && collection.length < 4)
+    if (searchBoxRef?.current && collection.length < 4)
       searchBoxRef.current.className = `flex xs:w-40 sm:w-80 h-32 overflow-auto absolute z-20 ${mainBgColor} ${mainBorderColor}`;
     if (searchBoxRef && searchBoxRef.current && collection.length > 4)
       searchBoxRef.current.className = `flex xs:w-40 sm:w-80 h-96 overflow-auto absolute z-20 ${mainBgColor} ${mainBorderColor}`;
-    if(searchBox) dispatch(filterCollectionFetchAction(searchBox));
+    if (searchBox) dispatch(filterCollectionFetchAction(searchBox));
   };
 
-  const onClickHandler = (event: MouseEvent<HTMLLIElement>): void => {
+  const onClickHandler = (event: MouseEvent<HTMLLIElement>, id?: number): void => {
     const { currentTarget } = event;
     const clickedId = (currentTarget as Element).getAttribute("data-id");
     const clickedPath = (currentTarget as Element).getAttribute("data-path");
@@ -99,73 +109,82 @@ const SearchBar = (props: ISearchBarProps) => {
       </div>
       <div ref={searchBoxRef} className={`hidden`}>
         <ul className="w-full">
-          {collection != undefined && collection.length>=1
-            ? collection.map((item, index) => {
-                if ("name" in item && "poster_path" in item) {
-                  return (
-                    <li
-                      onClick={onClickHandler}
-                      key={index}
-                      data-id={item.id}
-                      data-path="tv"
-                      className="flex p-2 w-full items-center hover:bg-side-color hover:text-header-main-color cursor-pointer"
-                    >
-                      <img
-                        src={
-                          item.poster_path
-                            ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-                            : "http://cdn.onlinewebfonts.com/svg/img_546302.png"
-                        }
-                        className={`w-10 h-10 object-contain`}
-                      />
-                      <span>{item.name}</span>
-                    </li>
-                  );
-                }
-                if ("title" in item) {
-                  return (
-                    <li
-                      onClick={onClickHandler}
-                      key={index}
-                      data-id={item.id}
-                      data-path="movie"
-                      className="flex p-2 w-full items-center hover:bg-side-color hover:text-header-main-color cursor-pointer"
-                    >
-                      <img
-                        src={
-                          item.poster_path
-                            ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-                            : "http://cdn.onlinewebfonts.com/svg/img_546302.png"
-                        }
-                        className="w-10 h-10 object-contain"
-                      />
-                      <span>{item.title}</span>
-                    </li>
-                  );
-                }
-                if ("name" in item && "profile_path" in item) {
-                  return (
-                    <li
-                      onClick={onClickHandler}
-                      key={index}
-                      data-id={item.id}
-                      data-path="person"
-                      className="flex p-2 w-full items-center hover:bg-side-color hover:text-header-main-color cursor-pointer"
-                    >
-                      <img
-                        src={
-                          item.profile_path
-                            ? `https://image.tmdb.org/t/p/w500${item.profile_path}`
-                            : "http://cdn.onlinewebfonts.com/svg/img_546302.png"
-                        }
-                        className="w-10 h-10 object-contain"
-                      />
-                      <span>{item.name}</span>
-                    </li>
-                  );
-                }
-              })
-            : <span className="text-side-color">No result</span>}
+          {collection?.length ? (
+            collection.map((item, index) => {
+              
+              if ("name" in item && "poster_path" in item) {
+                return (
+                  <li
+                    onClick={(e) => onClickHandler(e, item.id)}
+                    key={item.id}
+                    data-id={item.id}
+                    data-path="tv"
+                    className="flex p-2 w-full items-center hover:bg-side-color hover:text-header-main-color cursor-pointer"
+                  >
+                    <img
+                      src={
+                        item.poster_path
+                          ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                          : "http://cdn.onlinewebfonts.com/svg/img_546302.png"
+                      }
+                      className={`w-10 h-10 object-contain`}
+                    />
+                    <span>{item.name}</span>
+                  </li>
+                );
+              }
+              if ("title" in item) {
+                return (
+                  <li
+                    onClick={onClickHandler}
+                    key={index}
+                    data-id={item.id}
+                    data-path="movie"
+                    className="flex p-2 w-full items-center hover:bg-side-color hover:text-header-main-color cursor-pointer"
+                  >
+                    <img
+                      src={
+                        item.poster_path
+                          ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                          : "http://cdn.onlinewebfonts.com/svg/img_546302.png"
+                      }
+                      className="w-10 h-10 object-contain"
+                    />
+                    <span>{item.title}</span>
+                  </li>
+                );
+              }
+
+              //! type matching
+              // if ((item as Movie)?.title) {
+              //   //....
+              // }
+
+              if ("name" in item && "profile_path" in item) {
+                return (
+                  <li
+                    onClick={onClickHandler}
+                    key={index}
+                    data-id={item.id}
+                    data-path="person"
+                    className="flex p-2 w-full items-center hover:bg-side-color hover:text-header-main-color cursor-pointer"
+                  >
+                    <img
+                      src={
+                        item.profile_path
+                          ? `https://image.tmdb.org/t/p/w500${item.profile_path}`
+                          : "http://cdn.onlinewebfonts.com/svg/img_546302.png"
+                      }
+                      className="w-10 h-10 object-contain"
+                    />
+                    <span>{item.name}</span>
+                  </li>
+                );
+              }
+            })
+          ) : (
+            <span className="text-side-color">No result</span>
+          )}
         </ul>
       </div>
     </div>

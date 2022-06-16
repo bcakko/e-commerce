@@ -8,12 +8,12 @@ import { logUserInAction } from '../redux/actions/userActions';
 import { showNotifier } from '../redux/actions/notifierActions';
 export default function AuthPage() {
 
-    let [auth, setAuth] = useState({
+    const [auth, setAuth] = useState({
         login: true,
         register: false
     })
 
-    let [userInputs, setUserInputs] = useState({
+    const [userInputs, setUserInputs] = useState({
         username: "",
         password: "",
         confirmPassword: ""
@@ -29,29 +29,31 @@ export default function AuthPage() {
     }
 
     const changeAuth = (event: MouseEvent<HTMLSpanElement>): void => {
-        if(auth.login) {
-            messageHandler(null)
-            setAuth({login: false, register: true})
-        }
-        if(auth.register) {
-            messageHandler(null)
-            setAuth({login: true, register: false})
-        }
+        messageHandler(null)
+        setAuth({login: auth.login, register: !auth.login})
+
+        // if(auth.login) {
+        //     setAuth({login: false, register: true})
+        // }
+        // if(auth.register) {
+        //     setAuth({login: true, register: false})
+        // }
     }
 
     const onInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const {target} = event
         const inputType = (target as Element).getAttribute("data-type");
-        if(inputType === "setUsername") {
-            let inputString = String(event.target.value);
-            setUserInputs({...userInputs, username: inputString});
-        } else if(inputType === "setPassword"){
-            let inputString = String(event.target.value);
-            setUserInputs({...userInputs, password: inputString});
-        } else if(inputType === "setConfirmPassword"){
-            let inputString = String(event.target.value);
-            setUserInputs({...userInputs, confirmPassword: inputString})
-        }
+
+        let inputString = String(event.target.value);
+        setUserInputs({...userInputs, [inputType!]: inputString});
+
+        // if(inputType === "setUsername") {
+        //     setUserInputs({...userInputs, username: inputString});
+        // } else if(inputType === "setPassword"){
+        //     setUserInputs({...userInputs, password: inputString});
+        // } else if(inputType === "setConfirmPassword"){
+        //     setUserInputs({...userInputs, confirmPassword: inputString})
+        // }
     }
 
     function messageHandler(error:any){
@@ -131,8 +133,6 @@ export default function AuthPage() {
                 console.log("inputs are weak")
             }
         }
-
-
     }
 
 
@@ -162,7 +162,7 @@ return (
                 <span className="xs:text-xs sm:text-sm xs:opacity-50">{auth.register ? "Do you have an account?" : "Don't you have an account?"}</span>
                 <span onClick={changeAuth} className="xs:text-sm xs:opacity-75 cursor-pointer hover:opacity-100">{auth.register ? "LOGIN" : "REGISTER"}</span>
             </div>
-        </div>
+        </div>const
     </div>
 </div>
 )

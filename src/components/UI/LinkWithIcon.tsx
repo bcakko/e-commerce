@@ -5,14 +5,11 @@ const LinkWithIcon = (props: {
   icon: JSX.Element;
   className?: string;
 }) => {
-  if (props.type === "inner") {
-    return (
-      <NavLink className={props.className} to={props.path}>
-        {props.icon}
-      </NavLink>
-    );
-  }
-  return (
+  return props.type === "inner" ? (
+    <NavLink className={props.className} to={props.path}>
+      {props.icon}
+    </NavLink>
+  ) : (
     <a className={props.className} href={props.path}>
       {props.icon}
     </a>

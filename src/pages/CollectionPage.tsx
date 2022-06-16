@@ -23,9 +23,9 @@ const CollectionPage = () => {
   const collection = useSelector(
     (state: RootState) => state.collection.collection
   );
-  const collectionMap: {
-    [key: string]: "shows" | "movies";
-  } = {
+  type Abcd = Record<"tv" | "movie", "shows" | "movies">;
+
+  const collectionMap: Abcd = {
     tv: "shows",
     movie: "movies",
   };
@@ -56,9 +56,10 @@ const CollectionPage = () => {
     }
   }, [dispatch, page, isUrlValid, mainCategory, subCategory]);
 
+  const category = mainCategory as keyof Abcd; // ! --
+
   if (isUrlValid) {
-    results =
-      collection[collectionMap[mainCategory ? mainCategory : ""]].results;
+    results = collection[collectionMap[category]].results;
   }
   if (isLoading) {
     return (
@@ -73,13 +74,16 @@ const CollectionPage = () => {
     navigate(
       `/collection/${mainCategory}/${subCategory}/${event.target.textContent}`
     );
-    document.body.scrollTop = 0; // For Safari
+
+    // ! -
+    document.body.scroll({
+      top: 0,
+      behavior: "smooth",
+    }); // For Safari
     document.documentElement.scrollTop = 0; // For Chrome & Firefox
   };
 
-  const headerTextMap: {
-    [key: string]: string;
-  } = {
+  const headerTextMap: Record<string, string> = {
     tv: "TV Shows",
     movie: "Movies",
     popular: "Popular",

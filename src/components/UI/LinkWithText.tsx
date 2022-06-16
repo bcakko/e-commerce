@@ -9,7 +9,7 @@ const LinkWithText = (props: {
   className?: string;
   data_path: string | null;
   data_url?: string | null;
-  data_action?: any
+  data_action?: any;
 }) => {
   const dispatch = useDispatch();
 
@@ -22,14 +22,12 @@ const LinkWithText = (props: {
   };
 
   if (props.type === "inner" && props.data_action) {
-    return(
+    return (
       <NavLink onClick={props.data_action} to="/" className={props.className}>
         {props.text}
       </NavLink>
-    )
-  }
-
-  else if (props.type === "inner" && props.data_url) {
+    );
+  } else if (props.type === "inner" && props.data_url) {
     return (
       <NavLink
         onClick={onClickHandler}
@@ -42,17 +40,16 @@ const LinkWithText = (props: {
       </NavLink>
     );
   } else if (props.type === "inner" && props.data_url === null) {
-    return(
-    <NavLink onClick={onClickHandler} to={`/${props.data_path}`} data-path={props.data_path}
-    className={props.className}>
-      {props.text}
-    </NavLink>
-    )
-  } else 
-  return (
-    <div className={props.className}>
-      {props.text}
-    </div>
-  );
+    return (
+      <NavLink
+        onClick={onClickHandler}
+        to={`/${props.data_path}`}
+        data-path={props.data_path}
+        className={props.className}
+      >
+        {props.text}
+      </NavLink>
+    );
+  } else return <div className={props.className}>{props.text}</div>;
 };
 export default LinkWithText;

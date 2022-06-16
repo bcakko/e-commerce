@@ -1,43 +1,61 @@
-import { useRef } from 'react';
+import { useRef } from "react";
 // Types
 import { IDropdownCategory, IDropdownProps } from "../../types/Header.types";
 // Component
 import LinkWithText from "./LinkWithText";
 
-const DropdownMenu = (props: IDropdownProps) => {
-  const { ddTitle, ddTitleStyle, ddTitleHoverColor, ddList, ddListStyle, ddBackgroundColor, ddStyle } = props;
+const DropdownMenu = ({
+  ddTitle,
+  ddTitleStyle,
+  ddTitleHoverColor,
+  ddList,
+  ddListStyle,
+  ddBackgroundColor,
+  ddStyle,
+}: IDropdownProps) => {
   const ddRef = useRef<HTMLUListElement>(null);
   const ddTitleRef = useRef<HTMLSpanElement>(null);
-  
-  const showDropdown = () : void => {
-    if(ddRef && ddRef.current && ddTitleRef && ddTitleRef.current !== null) {
+
+  const showDropdown = (): void => {
+    // if (ddRef && ddRef.current && ddTitleRef && ddTitleRef.current !== null) {
+    if (ddRef?.current && ddTitleRef?.current) {
       ddRef.current.className = `block absolute p-1 border rounded flex flex-col ${ddBackgroundColor} ${ddStyle}`;
-      ddTitleRef.current.className = `${ddTitleStyle} ${ddTitleHoverColor}`
+      ddTitleRef.current.className = `${ddTitleStyle} ${ddTitleHoverColor}`;
     }
   };
 
-  const hideDropdown = () : void => {
-    if(ddRef && ddRef.current && ddTitleRef && ddTitleRef.current !== null) {
+  const hideDropdown = (): void => {
+    if (ddRef && ddRef.current && ddTitleRef && ddTitleRef.current !== null) {
       ddRef.current.className = "hidden";
-      ddTitleRef.current.className = ddTitleStyle
+      ddTitleRef.current.className = ddTitleStyle;
     }
   };
 
   return (
-    <div onMouseEnter={()=> showDropdown()} onMouseLeave={()=> hideDropdown()} className='z-30'>
-      <span ref={ddTitleRef} className={ddTitleStyle}>{ddTitle}</span>
+    <div
+      onMouseEnter={() => showDropdown()}
+      onMouseLeave={() => hideDropdown()}
+      className="z-30"
+    >
+      <span ref={ddTitleRef} className={ddTitleStyle}>
+        {ddTitle}
+      </span>
       <ul ref={ddRef} className="hidden">
-        {ddList.links ? ddList.links.map((item: IDropdownCategory, index: number) =>
-          <LinkWithText
-            key={index}
-            type="inner"
-            text={item.title}
-            className={ddListStyle}
-            data_path={item.main_path}
-            data_url={item.sub_path}
-            data_action={item.data_action}
-          />
-        ) : <li>loading</li>}
+        {ddList.links ? (
+          ddList.links.map((item: IDropdownCategory, index: number) => (
+            <LinkWithText
+              key={index}
+              type="inner"
+              text={item.title}
+              className={ddListStyle}
+              data_path={item.main_path}
+              data_url={item.sub_path}
+              data_action={item.data_action}
+            />
+          ))
+        ) : (
+          <li>loading</li>
+        )}
       </ul>
     </div>
   );

@@ -4,7 +4,6 @@ const ButtonWithText = (props: {
   className?: string;
 }) => {
   return (
-    <div>
       <button
         className={`text-sm sm:text-base lg:text-xl px-2 py-1 sm:px-6 sm:py-2.5 bg-secondary-color rounded-3xl text-side-color hover:bg-main-color ${props.className}`}
         type="button"
@@ -12,7 +11,6 @@ const ButtonWithText = (props: {
       >
         {props.text}
       </button>
-    </div>
   );
 };
 

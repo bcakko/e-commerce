@@ -24,4 +24,9 @@ export interface Movie {
     id: number;
     name: string;
   }[];
+
+  name?: null;
+  known_for_department?: null;
+  original_name?: null;
+  profile_path?: null;
 }

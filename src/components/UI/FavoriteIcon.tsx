@@ -4,11 +4,9 @@ const FavoriteIcon = (props: {
   className?: string;
 }) => {
   return (
-    <div>
       <button className={props.className} type="button" onClick={props.onClick}>
         {props.icon}
       </button>
-    </div>
   );
 };
 

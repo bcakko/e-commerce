@@ -24,14 +24,12 @@ import FavoriteIcon from "../components/UI/FavoriteIcon";
 const DetailsPage = () => {
   const { mainCategory, id } = useParams();
   const dispatch = useDispatch();
-  let isUrlValid = false;
-  if (
+
+  let isUrlValid =
     mainCategory === "tv" ||
     mainCategory === "movie" ||
-    mainCategory === "person"
-  ) {
-    isUrlValid = true;
-  }
+    mainCategory === "person";
+
   useEffect(() => {
     dispatch({
       type: GET_DETAIL_FETCH,
@@ -47,15 +45,6 @@ const DetailsPage = () => {
   );
   const isLoading = useSelector((state: RootState) => state.detail.isLoading);
 
-  if (
-    !isUrlValid ||
-    (!("title" in detail) &&
-      !("name" in detail && "profile_path" in detail) &&
-      !("name" in detail && "poster_path" in detail))
-  ) {
-    return <NotFoundPage />;
-  }
-
   if (isLoading) {
     return (
       <Modal onClose={() => {}}>
@@ -64,117 +53,56 @@ const DetailsPage = () => {
     );
   }
 
-  const detailInfoMap: {
-    title: string;
-    original_title: string;
-    release_date: string | null;
-    overview: string;
-    poster_path: string;
-    backdrop_path: string | null;
-    genres: { id: number; name: string }[] | undefined;
-    known_for_department: string | undefined;
-    production: Movie | Show | undefined;
-    type: "movie" | "tv" | undefined;
-  } = {
-    title: "title" in detail ? detail.title : detail.name,
-    original_title:
-      "title" in detail
-        ? detail.original_title
-        : "first_air_date" in detail
-        ? detail.original_name
-        : "",
-    release_date:
-      "title" in detail
-        ? detail.release_date
-        : "first_air_date" in detail
-        ? detail.first_air_date
-        : null,
-    overview:
-      "title" in detail
-        ? detail.overview
-        : "first_air_date" in detail
-        ? detail.overview
-        : detail.biography,
-    poster_path:
-      "title" in detail
-        ? detail.poster_path
-        : "first_air_date" in detail
-        ? detail.poster_path
-        : detail.profile_path,
-    backdrop_path:
-      "title" in detail
-        ? detail.backdrop_path
-        : "first_air_date" in detail
-        ? detail.backdrop_path
-        : null,
-    genres:
-      "title" in detail || "first_air_date" in detail
-        ? detail.genres
-        : undefined,
+  if (
+    !isUrlValid ||
+    (!("title" in detail) &&
+      !("name" in detail && ("profile_path" || "poster_path" in detail)))
+    // !("name" in detail && "profile_path" in detail) &&
+    // !("name" in detail && "poster_path" in detail))
+  ) {
+    return <NotFoundPage />;
+  }
 
-    known_for_department:
-      !("title" in detail) && !("first_air_date" in detail)
-        ? detail.known_for_department
-        : undefined,
-    production:
-      "title" in detail || "first_air_date" in detail ? detail : undefined,
-    type:
-      "title" in detail
-        ? "movie"
-        : "first_air_date" in detail
-        ? "tv"
-        : undefined,
-  };
   const isFavorite = favorites.some(
-    (e) => detailInfoMap.poster_path === e.poster_path
+    (item) => detail.poster_path === item.poster_path
   );
+
+  const isPerson = detail.known_for_department;
+
   const onFavoriteHandler = () => {
-    if (detailInfoMap.production) {
+    if (!isPerson) {
       if (isFavorite) {
-        dispatch(removeFromFavoritesAction(detailInfoMap.production));
+        dispatch(removeFromFavoritesAction(detail as Movie | Show));
         dispatch(showNotifier("removed from favorites!"));
       } else {
-        dispatch(addToFavoritesAction(detailInfoMap.production));
+        dispatch(addToFavoritesAction(detail as Movie | Show));
         dispatch(showNotifier("added to favorites!"));
       }
     }
   };
+
+  const Icon = isFavorite ? MdOutlineFavorite : MdOutlineFavoriteBorder;
 
   return (
     <Fragment>
       <div className="h-[200px] sm:h-[400px] relative flex items-end">
         <div className="w-full flex justify-between items-end text-header-main-color max-w-[1100px] mx-auto">
           <div className="">
-            <h1 className="text-4xl px-5">{detailInfoMap.title} </h1>
+            <h1 className="text-4xl px-5">{detail.title} </h1>
             <span className="text-sm px-5 py-5">
-              {detailInfoMap.title !== detailInfoMap.original_title &&
-                detailInfoMap.original_title}
+              {detail.title !== detail.original_title && detail.original_title}
             </span>
           </div>
-          {detailInfoMap.production ? (
+          {detail && (
             <FavoriteIcon
               className="p-5"
-              icon={
-                isFavorite ? (
-                  <MdOutlineFavorite
-                    className={`w-9 h-9`}
-                    onClick={onFavoriteHandler}
-                  />
-                ) : (
-                  <MdOutlineFavoriteBorder
-                    className={`w-9 h-9`}
-                    onClick={onFavoriteHandler}
-                  />
-                )
-              }
+              icon={<Icon className={`w-9 h-9`} onClick={onFavoriteHandler} />}
             />
-          ) : (
-            ""
           )}
         </div>
-        {detailInfoMap.backdrop_path ? (
+        {detail?.backdrop_path ? (
           <CollectionImage
-            url={detailInfoMap.backdrop_path}
+            url={detail.backdrop_path}
             className="absolute top-0 w-full h-full object-cover -z-20 brightness-[60%] blur-[1px]"
           />
         ) : (
@@ -190,46 +118,40 @@ const DetailsPage = () => {
           <Fragment>
             <CollectionCard
               id={detail.id}
-              title={detailInfoMap.title}
-              imageUrl={detailInfoMap.poster_path}
-              rating={
-                !("known_for_department" in detail)
-                  ? detail.vote_average
-                  : undefined
-              }
-              type={detailInfoMap.type}
-              production={detailInfoMap.production}
+              title={detail.title || detail.name}
+              imageUrl={detail.profile_path || detail.poster_path}
+              rating={detail.vote_average || undefined}
+              production={detail as Movie | Show}
             />
           </Fragment>
         </div>
         <div className="w-full sm:w-2/3 md:w-3/4 lg:w-4/6 p-5 order-1 sm:order-2 max-w-[800px]">
           <div className="">
-            {detailInfoMap.known_for_department && (
+            {detail.known_for_department && (
               <Fragment>
                 <span className="text-xl">Known for:</span>
                 <span className="bg-secondary-color text-header-main-color m-2 px-4 py-2 rounded-lg italic">
-                  {detailInfoMap.known_for_department}
+                  {detail.known_for_department}
                 </span>
               </Fragment>
             )}
-            {detailInfoMap.genres?.map((e) => (
+            {detail.genres?.map((genre) => (
               <span
-                key={e.id}
+                key={genre.id}
                 className="inline-block bg-secondary-color text-header-main-color mr-4 my-2 px-4 py-2 rounded-lg italic"
               >
-                {e.name}
+                {genre.name}
               </span>
             ))}
 
             <p className="text-xl mt-4">
-              {detailInfoMap.release_date &&
-                `Release Date: ${detailInfoMap.release_date}`}
+              {detail.release_date && `Release Date: ${detail.release_date}`}
             </p>
           </div>
-          <p className={`${detailInfoMap.overview && "indent-5"} italic pt-3`}>
-            {detailInfoMap.overview
-              ? detailInfoMap.overview
-              : `Currently there's no overview for ${detailInfoMap.title}.`}
+          <p className={`${detail.overview && "indent-5"} italic pt-3`}>
+            {detail.overview
+              ? detail.overview
+              : `Currently there's no overview for ${detail.title}.`}
           </p>
         </div>
       </div>

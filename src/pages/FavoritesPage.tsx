@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import CollectionCard from "../components/UI/CollectionCard";
 import { Movie } from "../types/Movies.types";

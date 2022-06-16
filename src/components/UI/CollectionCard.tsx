@@ -12,11 +12,12 @@ import {
   removeFromFavoritesAction,
 } from "../../redux/actions/favoritesActions";
 import { showNotifier } from "../../redux/actions/notifierActions";
+import { Fragment, useMemo } from "react";
 
 const CollectionCard = (props: {
   id: number;
-  title: string;
-  imageUrl: string;
+  title?: string | null;
+  imageUrl?: string | null;
   rating?: number;
   type?: "movie" | "tv";
   production?: Movie | Show;
@@ -26,7 +27,11 @@ const CollectionCard = (props: {
   const favorites = useSelector(
     (state: RootState) => state.favorites.favorites
   );
-  const isFavorite = favorites.some((e) => props.imageUrl === e.poster_path);
+
+  const isFavorite = useMemo(
+    () => favorites.some((item) => props.imageUrl === item.poster_path),
+    [favorites, props.imageUrl]
+  );
 
   const navigateToDetailsHandler = () => {
     navigate(`/detail/${props.type}/${props.id}`);
@@ -36,13 +41,15 @@ const CollectionCard = (props: {
     if (props.production) {
       if (isFavorite) {
         dispatch(removeFromFavoritesAction(props.production));
-        dispatch(showNotifier("removed from favorites!"))
+        dispatch(showNotifier("removed from favorites!"));
       } else {
         dispatch(addToFavoritesAction(props.production));
-        dispatch(showNotifier("added to favorites!"))
+        dispatch(showNotifier("added to favorites!"));
       }
     }
   };
+
+  const Icon = isFavorite ? MdOutlineFavorite : MdOutlineFavoriteBorder;
 
   return (
     <div className="w-full h-full p-3 text-left">
@@ -50,7 +57,8 @@ const CollectionCard = (props: {
         <CollectionImage
           className="cursor-pointer object-contain w-full rounded-t-lg"
           url={props.imageUrl}
-          onClick={props.production ? navigateToDetailsHandler : () => {}}
+          // ! --
+          {...(props.production ? { onClick: navigateToDetailsHandler } : null)}
         />
         <div className="px-3 bg-main-color text-header-main-color rounded-b-lg pt-5">
           <p className="truncate font-semibold">{props.title}</p>
@@ -58,24 +66,14 @@ const CollectionCard = (props: {
             {props.production ? (
               <FavoriteIcon
                 icon={
-                  isFavorite ? (
-                    <MdOutlineFavorite
-                      className={`w-7 h-7`}
-                      onClick={onFavoriteHandler}
-                    />
-                  ) : (
-                    <MdOutlineFavoriteBorder
-                      className={`w-7 h-7`}
-                      onClick={onFavoriteHandler}
-                    />
-                  )
+                  <Icon className={`w-7 h-7`} onClick={onFavoriteHandler} />
                 }
               />
             ) : (
               ""
             )}
             <p className="font-bold pb-2">
-              {props.rating ? props.rating.toFixed(1) : ""}
+              {props.rating ? props.rating.toFixed(1) : <></>}
             </p>
           </div>
         </div>

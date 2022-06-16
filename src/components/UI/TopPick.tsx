@@ -4,9 +4,7 @@ import Carousel from "./Carousel";
 
 const TopPick = (props: { production: (Movie | Show)[] }) => {
   return (
-    <div className="">
       <Carousel type="banner" slides={props.production} />
-    </div>
   );
 };
 

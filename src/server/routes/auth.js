@@ -3,6 +3,18 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/user.schema");
 
+
+/*
+
+api.domain/users    //All users - method GET
+api.domain/users/:id     //one user - method GET
+api.domain/users/:id + body params    //one user - method PUT
+api.domain/users/:id     //one user - method DELETE
+api.domain/users/:id/details     //one user - method GET
+api.domain/users/register + body params //one user - method POST
+
+*/
+
 // POST
 router.post("/registerUser", async (req, res) => {
     const newUser = new UserModel({
@@ -12,7 +24,7 @@ router.post("/registerUser", async (req, res) => {
 
     try {
         const userToSave = await newUser.save();
-        res.status(200).json(userToSave)
+        res.status(200).send(userToSave)
     } catch (err) {
         res.status(400).json({
             message: error.message

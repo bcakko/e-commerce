@@ -4,6 +4,7 @@ export interface People {
   total_pages: number;
   total_results: number;
 }
+
 export interface Person {
   adult: boolean;
   gender: number;
@@ -14,7 +15,18 @@ export interface Person {
   popularity: number;
   profile_path: string;
   biography: string;
+
+  overview?: string | null;
+  title?: string | null;
+  original_title?: string | null;
+  original_name?: string | null;
+  poster_path?: string | null;
+  backdrop_path?: string | null;
+  genres?: [] | null;
+  release_date?: string | null;
+  vote_average?: number | null;
 }
+
 export interface KnownForEntity {
   adult?: boolean | null;
   backdrop_path?: string | null;
